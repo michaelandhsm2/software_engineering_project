@@ -17,6 +17,9 @@
           max-width: 800px;
           margin: 0 auto;
       }
+      .div_foot{
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -29,11 +32,11 @@
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="CourseManagement.html">課程管理 <span class="sr-only">(current)</span></a>
-            </li>
             <li class="nav-item">
-              <a class="nav-link" href="HomeworkManagement.html">作業管理</a>
+              <a class="nav-link" href="CourseManagement.html">課程管理</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="HomeworkManagement.html">作業管理 <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="StudentManagement.html">學生管理</a>
@@ -64,7 +67,7 @@
                     <td>學生 1</td>
                     <td>2017/10/19 16:20:00</td>
                     <td><a class="btn btn-info" href="">下載</a></td>
-                    <td><input type="number" class="form-control"></td>
+                    <td><input type="number" class="form-control" value="68"></td>
                 </tr>
                 <tr>
                     <th scope="row">2</th>
@@ -85,18 +88,20 @@
                     <td>學生 4</td>
                     <td></td>
                     <td></td>
-                    <td><input type="number" class="form-control"></td>
+                    <td><input type="number" class="form-control" value="0"></td>
                 </tr>
                 <tr>
                     <th scope="row">5</th>
                     <td>學生 5</td>
                     <td>2017/10/19 16:20:00</td>
                     <td><a class="btn btn-info" href="">下載</a></td>
-                    <td><input type="number" class="form-control"></td>
+                    <td><input type="number" class="form-control" value="90"></td>
                 </tr>
             </tbody>
         </table>
-        <button type="button" class="btn btn-primary">確認更新</button>
+        <div class="div_foot">
+          <button type="button" class="btn btn-primary">確認更新</button>
+        </div>
         </form>
       </div>
     </div>

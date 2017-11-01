@@ -14,6 +14,11 @@
       }
       .div_body{
           padding: 10px 0;
+          max-width: 800px;
+          margin: 0 auto;
+      }
+      .div_foot{
+        text-align: center;
       }
     </style>
   </head>
@@ -44,61 +49,50 @@
     </header>
     <div class="container-fluid">
       <div class="div_body">
-        <div class="row">
-            <div class="col-2">
-                <div class="card">
-                    <div class="card-header">
-                        課程
-                    </div>
-                    <div class="list-group list-group-flush">
-                        <a href="#" class="list-group-item list-group-item-action active">軟體工程</a>
-                        <a href="#" class="list-group-item list-group-item-action">作業系統</a>
-                        <a href="#" class="list-group-item list-group-item-action">樣式導向軟體設計</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-10">
-                <table class="table table-hover table-bordered">
-                <thead>
-                    <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">作業名稱</th>
-                    <th scope="col">繳交期限</th>
-                    <th scope="col">審核作業</th>
-                    <th scope="col">成績報告</th>
-                    <th scope="col">操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
+        <h3>作業 1</h3>
+        <p>平均成績 : 63.8 分</p>
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">學生姓名</th>
+                <th scope="col">狀態</th>
+                <th scope="col">分數</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
                     <th scope="row">1</th>
-                    <td>HomeWork 1</td>
-                    <td>2017/10/30</td>
-                    <td><a class="btn btn-info" href="homework_audit.html">審核</a></td>
-                    <td><a class="btn btn-info" href="homework_report.html">檢視</a></td>
-                    <td><a class="btn btn-info" href="">編輯</a></td>
-                    </tr>
-                    <tr>
+                    <td><a href="">學生 1</a></td>
+                    <td class="text-success">已上傳</td>
+                    <td>68</td>
+                </tr>
+                <tr>
                     <th scope="row">2</th>
-                    <td>HomeWork 2</td>
-                    <td>2017/11/16</td>
-                    <td><a class="btn btn-info" href="">審核</a></td>
-                    <td><a class="btn btn-info" href="">檢視</a></td>
-                    <td><a class="btn btn-info" href="">編輯</a></td>
-                    </tr>
-                    <tr>
+                    <td><a href="">學生 2</a></td>
+                    <td class="text-success">已上傳</td>
+                    <td>85</td>
+                </tr>
+                <tr>
                     <th scope="row">3</th>
-                    <td>HomeWork 3</td>
-                    <td>2017/12/8</td>
-                    <td><a class="btn btn-info" href="">審核</a></td>
-                    <td><a class="btn btn-info" href="">檢視</a></td>
-                    <td><a class="btn btn-info" href="">編輯</a></td>
-                    </tr>
-                </tbody>
-                </table>
-                <a class="btn btn-success btn-block" href="homework_new.html">新增作業</a>
-            </div>
-        </div>
+                    <td><a href="">學生 3</a></td>
+                    <td class="text-success">已上傳</td>
+                    <td>76</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td><a href="">學生 4</a></td>
+                    <td class="text-danger">未上傳</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td><a href="">學生 5</a></td>
+                    <td class="text-success">已上傳</td>
+                    <td>90</td>
+                </tr>
+            </tbody>
+        </table>
       </div>
     </div>
     
