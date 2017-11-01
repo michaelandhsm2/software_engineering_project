@@ -14,6 +14,8 @@
       }
       .div_body{
           padding: 10px 0;
+          max-width: 800px;
+          margin: 0 auto;
       }
     </style>
   </head>
@@ -44,37 +46,58 @@
     </header>
     <div class="container-fluid">
       <div class="div_body">
+        <h3>作業 1</h3>
+        <form action="">
         <table class="table table-hover table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">課程名稱</th>
-              <th scope="col">助教</th>
-              <th scope="col">操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>軟體工程</td>
-              <td>助教 1</td>
-              <td><a class="btn btn-info" href="">編輯</a></td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>作業系統</td>
-              <td>助教 2</td>
-              <td><a class="btn btn-info" href="">編輯</a></td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>樣式導向軟體設計</td>
-              <td>無</td>
-              <td><a class="btn btn-info" href="">編輯</a></td>
-            </tr>
-          </tbody>
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">學生姓名</th>
+                <th scope="col">繳交時間</th>
+                <th scope="col">作業檔案</th>
+                <th scope="col">分數</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>學生 1</td>
+                    <td>2017/10/19 16:20:00</td>
+                    <td><a class="btn btn-info" href="">下載</a></td>
+                    <td><input type="number" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>學生 2</td>
+                    <td>2017/10/19 16:20:00</td>
+                    <td><a class="btn btn-info" href="">下載</a></td>
+                    <td><input type="number" class="form-control" value="85"></td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>學生 3</td>
+                    <td>2017/10/19 16:20:00</td>
+                    <td><a class="btn btn-info" href="">下載</a></td>
+                    <td><input type="number" class="form-control" value="76"></td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>學生 4</td>
+                    <td></td>
+                    <td></td>
+                    <td><input type="number" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>學生 5</td>
+                    <td>2017/10/19 16:20:00</td>
+                    <td><a class="btn btn-info" href="">下載</a></td>
+                    <td><input type="number" class="form-control"></td>
+                </tr>
+            </tbody>
         </table>
-        <a class="btn btn-success btn-block" href="course_new.html">新增課程</a>
+        <button type="button" class="btn btn-primary">確認更新</button>
+        </form>
       </div>
     </div>
     
