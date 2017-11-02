@@ -8,10 +8,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="main_style.css">
     <style>
-      .navbar .navbar-text{
-        margin-right: 10px;
-      }
       .div_body{
           padding: 10px 0;
           max-width: 800px;
@@ -40,11 +38,15 @@
           <button type="button" class="btn btn-light">登出</button>
         </div>
       </nav>
+      <div class="div_headImg">
+        <img src="img/bg2.jpg" alt="image">
+      </div>
     </header>
     <div class="container-fluid">
       <div class="div_body">
         <h3>作業 1</h3>
         <p>平均成績 : 63.8 分</p>
+        <div id="container" style="min-width:400px;height:400px"></div>
         <table class="table table-hover table-bordered">
             <thead>
                 <tr>
@@ -96,5 +98,62 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+    <!-- Highcharts -->
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script>
+    $(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: '分數分布'
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                categories: [
+                    '0~10',
+                    '11~20',
+                    '21~30',
+                    '31~40',
+                    '41~50',
+                    '51~60',
+                    '61~70',
+                    '71~80',
+                    '81~90',
+                    '91~100'
+                ],
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '人數'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} 人</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: '人數',
+                data: [1, 0, 2, 1, 2, 3, 4, 6, 3, 2]
+            }]
+        });
+    });
+    </script>
   </body>
 </html>
