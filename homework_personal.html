@@ -44,48 +44,55 @@
     </header>
     <div class="container-fluid">
       <div class="div_body">
-        <h3>HomeWork 1</h3>
-        <p>平均成績 : 63.8 分</p>
+        <div>
+            <h5>學生基本資料</h5>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                    <th scope="col">學生姓名</th>
+                    <th scope="col">學號</th>
+                    <th scope="col">班級</th>
+                    <th scope="col">E-Mail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>學生 1</td>
+                    <td>106598001</td>
+                    <td>資工碩一</td>
+                    <td>t106598001@ntut.edu.tw</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <div id="container" style="min-width:400px;height:400px"></div>
         <table class="table table-hover table-bordered">
             <thead>
                 <tr>
                 <th scope="col">#</th>
-                <th scope="col">學生姓名</th>
-                <th scope="col">狀態</th>
+                <th scope="col">作業名稱</th>
+                <th scope="col">繳交狀態</th>
                 <th scope="col">分數</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <th scope="row">1</th>
-                    <td><a href="homework_personal.html">學生 1</a></td>
+                    <td>HomeWork 1</td>
                     <td class="text-warning">遲交</td>
                     <td>68</td>
                 </tr>
                 <tr>
                     <th scope="row">2</th>
-                    <td><a href="">學生 2</a></td>
+                    <td>HomeWork 2</td>
                     <td class="text-success">已上傳</td>
                     <td>85</td>
                 </tr>
                 <tr>
                     <th scope="row">3</th>
-                    <td><a href="">學生 3</a></td>
+                    <td>HomeWork 3</td>
                     <td class="text-success">已上傳</td>
                     <td>76</td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td><a href="">學生 4</a></td>
-                    <td class="text-danger">未上傳</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td><a href="">學生 5</a></td>
-                    <td class="text-success">已上傳</td>
-                    <td>90</td>
                 </tr>
             </tbody>
         </table>
@@ -105,52 +112,36 @@
     $(function () {
         $('#container').highcharts({
             chart: {
-                type: 'column'
+                type: 'line'
             },
             title: {
-                text: '分數分布'
+                text: '作業分數'
             },
             subtitle: {
-                text: ''
+                text: '平均成績 : 63.8 分'
             },
             xAxis: {
-                categories: [
-                    '0~10',
-                    '11~20',
-                    '21~30',
-                    '31~40',
-                    '41~50',
-                    '51~60',
-                    '61~70',
-                    '71~80',
-                    '81~90',
-                    '91~100'
-                ],
-                crosshair: true
+                categories: ['HomeWork 1', 'HomeWork 2', 'HomeWork 3', 'HomeWork 4', 'HomeWork 5']
             },
             yAxis: {
-                min: 0,
                 title: {
-                    text: '人數'
+                    text: '分數'
                 }
             },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} 人</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
             plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
+                line: {
+                    dataLabels: {
+                        enabled: true          // 开启数据标签
+                    },
+                    enableMouseTracking: false // 关闭鼠标跟踪，对应的提示框、点击事件会失效
                 }
             },
             series: [{
-                name: '人數',
-                data: [1, 0, 2, 1, 2, 3, 4, 6, 3, 2]
+                name: '個人成績',
+                data: [68.0, 85.0, 76.0]
+            }, {
+                name: '班級平均',
+                data: [83.9, 78.5, 81.9]
             }]
         });
     });
