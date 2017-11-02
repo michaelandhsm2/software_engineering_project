@@ -28,16 +28,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="CourseManagement.html">課程管理</a>
+              <a class="nav-link" href="AccountManagement.html">帳號管理</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="HomeworkManagement.html">作業管理</a>
+              <a class="nav-link" href="CourseManagement.html">課程管理</a>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="StudentManagement.html">學生管理 <span class="sr-only">(current)</span></a>
             </li>
           </ul>
-          <span class="navbar-text">教師</span>
+          <span class="navbar-text">管理員</span>
           <button type="button" class="btn btn-light">登出</button>
         </div>
       </nav>
@@ -64,8 +64,8 @@
                     <th scope="col">#</th>
                     <th scope="col">學生姓名</th>
                     <th scope="col">學號</th>
+                    <th scope="col">班級</th>
                     <th scope="col">E-Mail</th>
-                    <th scope="col">操作</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,38 +73,45 @@
                     <th scope="row">1</th>
                     <td>學生 1</td>
                     <td>106598001</td>
+                    <td>資工碩一</td>
                     <td>t106598001@ntut.edu.tw</td>
-                    <td><a class="btn btn-danger" href="">移除</a></td>
                     </tr>
                     <tr>
                     <th scope="row">2</th>
                     <td>學生 2</td>
                     <td>106598002</td>
+                    <td>資工碩一</td>
                     <td>t106598002@ntut.edu.tw</td>
-                    <td><a class="btn btn-danger" href="">移除</a></td>
                     </tr>
                     <tr>
                     <th scope="row">3</th>
                     <td>學生 3</td>
                     <td>106598003</td>
+                    <td>資工碩一</td>
                     <td>t106598003@ntut.edu.tw</td>
-                    <td><a class="btn btn-danger" href="">移除</a></td>
                     </tr>
                     <th scope="row">4</th>
                     <td>學生 4</td>
                     <td>106598004</td>
+                    <td>資工二</td>
                     <td>t106598004@ntut.edu.tw</td>
-                    <td><a class="btn btn-danger" href="">移除</a></td>
                     </tr>
                     <th scope="row">5</th>
                     <td>學生 5</td>
                     <td>106598005</td>
+                    <td>資工三</td>
                     <td>t106598005@ntut.edu.tw</td>
-                    <td><a class="btn btn-danger" href="">移除</a></td>
                     </tr>
                 </tbody>
                 </table>
-                <a class="btn btn-success btn-block" href="">加入學生</a>
+                <div class="row">
+                  <div class="col">
+                    <button type="button" class="btn btn-success btn-block">匯入學生</button>
+                  </div>
+                  <div class="col">
+                    <button type="button" class="btn btn-danger btn-block">清除學生</button>
+                  </div>
+                </div>
             </div>
         </div>
       </div>

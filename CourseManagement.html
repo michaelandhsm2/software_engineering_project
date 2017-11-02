@@ -27,17 +27,17 @@
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="AccountManagement.html">帳號管理</a>
+            </li>
             <li class="nav-item active">
               <a class="nav-link" href="CourseManagement.html">課程管理 <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="HomeworkManagement.html">作業管理</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="StudentManagement.html">學生管理</a>
             </li>
           </ul>
-          <span class="navbar-text">教師</span>
+          <span class="navbar-text">管理員</span>
           <button type="button" class="btn btn-light">登出</button>
         </div>
       </nav>
@@ -47,34 +47,45 @@
         <table class="table table-hover table-bordered">
           <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">課號</th>
+              <th scope="col">學年度-學期</th>
               <th scope="col">課程名稱</th>
-              <th scope="col">助教</th>
-              <th scope="col">操作</th>
+              <th scope="col">學分</th>
+              <th scope="col">時數</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th scope="row">1</th>
+              <th scope="row">232954</th>
+              <td>106-1</td>
               <td>軟體工程</td>
-              <td>助教 1</td>
-              <td><a class="btn btn-info" href="">編輯</a></td>
+              <td>3.0</td>
+              <td>3</td>
             </tr>
             <tr>
-              <th scope="row">2</th>
+              <th scope="row">232936</th>
+              <td>106-1</td>
               <td>作業系統</td>
-              <td>助教 2</td>
-              <td><a class="btn btn-info" href="">編輯</a></td>
+              <td>3.0</td>
+              <td>3</td>
             </tr>
             <tr>
-              <th scope="row">3</th>
+              <th scope="row">232954</th>
+              <td>106-1</td>
               <td>樣式導向軟體設計</td>
-              <td>無</td>
-              <td><a class="btn btn-info" href="">編輯</a></td>
+              <td>3.0</td>
+              <td>3</td>
             </tr>
           </tbody>
         </table>
-        <a class="btn btn-success btn-block" href="course_new.html">新增課程</a>
+        <div class="row">
+          <div class="col">
+            <button type="button" class="btn btn-success btn-block">匯入課程</button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-danger btn-block">清除課程</button>
+          </div>
+        </div>
       </div>
     </div>
     
