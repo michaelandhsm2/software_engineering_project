@@ -31,7 +31,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="HomeworkManagement.html">作業管理 <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="AccountManagement.html">帳號管理 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="CourseManagement.html">課程管理</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="StudentManagement.html">學生管理</a>
             </li>
           </ul>
           <span class="navbar-text">教師</span>
@@ -46,45 +52,45 @@
       <div class="div_body">
             <div class="card">
                 <div class="card-header">
-                    新增作業
+                    新增帳號
                 </div>
                 <div class="card-body">
                     <form>
                     <div class="form-group row">
-                        <label for="" class="col-sm-2 col-form-label">作業名稱</label>
+                        <label for="" class="col-sm-2 col-form-label">姓名</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="" placeholder="請輸入作業名稱">
+                            <input type="text" class="form-control" id="" placeholder="請輸入姓名">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="" class="col-sm-2 col-form-label">作業說明</label>
+                        <label for="" class="col-sm-2 col-form-label">帳號</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="" rows="3" placeholder="請輸入作業說明"></textarea>
+                            <input type="text" class="form-control" id="" placeholder="請輸入帳號">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="" class="col-sm-2 col-form-label">繳交期限</label>
+                        <label for="" class="col-sm-2 col-form-label">密碼</label>
                         <div class="col-sm-10">
-                            <input type="date" class="form-control" id="">
+                            <input type="text" class="form-control" id="" placeholder="請輸入密碼">
                         </div>
                     </div>
-                    <fieldset class="form-group">
-                      <div class="row">
-                        <legend class="col-form-legend col-sm-2">開放遲交</legend>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">E-Mail</label>
                         <div class="col-sm-10">
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked> 開放
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2"> 關閉
-                            </label>
-                          </div>
+                            <input type="email" class="form-control" id="" placeholder="請輸入E-Mail">
                         </div>
-                      </div>
-                    </fieldset>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">權限</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="">
+                                <option>學生</option>
+                                <option>助教</option>
+                                <option>教師</option>
+                                <option>管理員</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="div_foot">
                         <button type="submit" class="btn btn-primary">確認新增</button>
                     </div>
