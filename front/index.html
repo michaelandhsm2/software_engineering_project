@@ -20,7 +20,7 @@
     }
     .div_body{
         max-width: 500px;
-        margin: 10% auto 10px auto;
+        margin: 5% auto 10px auto;
         background-color: #fff;
         padding: 20px;
         border-radius: 10px;
@@ -56,7 +56,7 @@
             </label>
           </div> -->
           <div class="div_btn">
-              <button type="button" class="btn btn-primary">登入</button>
+              <button type="button" class="btn btn-primary" id="btn_submit">登入</button>
           </div>
         </form>
       </div>
@@ -68,5 +68,71 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+      $("#btn_submit").click(function(){
+
+        var user = {
+          'id': '6',
+          'name': 'Alan',
+          'role': 'student'
+        }
+
+        window.sessionStorage.setItem("user", JSON.stringify(user));
+        switch (user.role) {
+          case 'student':
+            location.href= ("SubmitHomework.html");
+            break;
+        
+          default:
+            break;
+        }
+        
+
+        
+
+
+
+          // $.ajax({
+          //     url: "http://140.124.183.30:8080/SE_pj/api/login",
+          //     data: {
+          //       'account': $("#acc").val(),
+          //       'password': $("#pwd").val()
+          //     },
+          //     type:"POST",
+          //     dataType:'json',
+      
+          //     success: function(JData){
+          //       console.log('成功');
+          //       console.log(JData);
+          //       console.log(JData.member_id);
+          //       console.log(JData.member_name);
+          //       console.log(JData.permissions);
+
+
+
+          //       var user = {
+          //         'id': JData.member_id,
+          //         'name': JData.member_name,
+          //         'role': JData.permissions
+          //       }
+
+          //       window.sessionStorage.setItem("user", JSON.stringify(user));
+          //       location.href= ("index.html");
+          //     },
+      
+          //     error: function(xhr, ajaxOptions, thrownError){
+          //       console.log('失敗');
+          //       console.log(xhr.responseText);
+          //       console.log(xhr.status);
+          //       console.log(thrownError);
+          //     }
+          // });
+      });
+      </script>
   </body>
 </html>

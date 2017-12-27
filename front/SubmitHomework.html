@@ -41,9 +41,9 @@
                         課程
                     </div>
                     <div class="list-group list-group-flush">
-                        <a href="#" class="list-group-item list-group-item-action active">軟體工程</a>
-                        <a href="#" class="list-group-item list-group-item-action">作業系統</a>
-                        <a href="#" class="list-group-item list-group-item-action">樣式導向軟體設計</a>
+                        <button class="list-group-item list-group-item-action active" onclick="clickCourse(this,1)">軟體工程</button>
+                        <button class="list-group-item list-group-item-action" onclick="clickCourse(this,2)">作業系統</button>
+                        <button class="list-group-item list-group-item-action" onclick="clickCourse(this,3)">樣式導向軟體設計</button>
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                     <th scope="col">分數</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbody_hw">
                     <tr>
                     <th scope="row">1</th>
                     <td>HomeWork 1</td>
@@ -97,5 +97,84 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+    //讀取session的user資料
+    var session_user = window.sessionStorage.getItem("user");
+    user = JSON.parse(session_user);
+    console.log(user);
+
+    // 取得課程清單
+    // $.ajax({
+    //     url: "http://140.124.183.30:8080/SE_pj/api/login",
+    //     data: {
+    //       'member_id': user.id,
+    //       'list_type': 'student'
+    //     },
+    //     type:"POST",
+    //     dataType:'json',
+
+    //     success: function(JData){
+    //       console.log('成功');
+    //       console.log(JData);
+          
+    //       $(".list-group").empty();
+    //       var i = 0;
+    //       $.each(JData, function() {
+    //         $(".list-group").append("<button class=\"list-group-item list-group-item-action\" onclick=\"clickCourse(this,"+ JData[i].course_id +")\">"+ JData[i].course_name +"</button>");
+    //         i++;
+    //       });
+    //     },
+
+    //     error: function(xhr, ajaxOptions, thrownError){
+    //       console.log('失敗');
+    //       console.log(xhr.responseText);
+    //       console.log(xhr.status);
+    //       console.log(thrownError);
+    //     }
+    // });
+
+
+    function clickCourse(obj,course_id){
+      $('.list-group-item').removeClass('active');
+      $(obj).addClass('active');
+      console.log(course_id);
+
+      // 取得作業清單
+      // $.ajax({
+      //   url: "http://140.124.183.30:8080/SE_pj/api/login",
+      //   data: {
+      //     'course_id': course_id
+      //   },
+      //   type:"POST",
+      //   dataType:'json',
+
+      //   success: function(JData){
+      //     console.log('成功');
+      //     console.log(JData);
+          
+      //     $("#tbody_hw").empty();
+      //     var i = 0;
+      //     $.each(JData, function() {
+      //       $("#tbody_hw").append("<tr><th scope=\"row\">1</th><td>"+ JData[i].hw_name +"</td><td>"+ JData[i].deadline +"</td><td class=\"text-warning\">"+ JData[i].shw_status +"</td><td><a class=\"btn btn-info\" href=\"homework_submit.html?id="+ JData[i].hw_id +"\">上傳作業</a></td><td>"+ JData[i].shw_fraction +"</td></tr>");
+      //       i++;
+      //     });
+      //   },
+
+      //   error: function(xhr, ajaxOptions, thrownError){
+      //     console.log('失敗');
+      //     console.log(xhr.responseText);
+      //     console.log(xhr.status);
+      //     console.log(thrownError);
+      //   }
+      // });
+    }
+
+
+    </script>
   </body>
 </html>
