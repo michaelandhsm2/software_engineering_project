@@ -48,19 +48,19 @@
             <tbody>
                 <tr>
                     <th scope="row">作業名稱</th>
-                    <td>HomeWork 1</td>
+                    <td id="td_name">HomeWork 1</td>
                 </tr>
                 <tr>
                     <th scope="row">作業說明</th>
-                    <td>請上傳PDF檔，並將檔名以學號命名。</td>
+                    <td id="td_info">請上傳PDF檔，並將檔名以學號命名。</td>
                 </tr>
                 <tr>
                     <th scope="row">繳交期限</th>
-                    <td>2017/10/30</td>
+                    <td id="td_deadline">2017/10/30</td>
                 </tr>
                 <tr>
                     <th scope="row">開放遲交</th>
-                    <td>開放</td>
+                    <td id="td_late">開放</td>
                 </tr>
             </tbody>
         </table>
@@ -103,7 +103,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     
     <script>
-
+    // 取得get
     var hw_id = getParameter("hw_id");
     console.log(hw_id);
 
@@ -116,6 +116,41 @@
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
+
+
+
+    // 顯示作業資訊
+    $.ajax({
+        url: "http://140.124.183.30:8080/SE_pj/api/login",
+        data: {
+            'hw_id': hw_id
+        },
+        type:"POST",
+        dataType:'json',
+
+        success: function(JData){
+            console.log('成功');
+            console.log(JData);
+            $('#td_name').text(JData.hw_name);
+            $('#td_info').text(JData.hw_info);
+            $('#td_deadline').text(JData.deadline);
+            $('#td_late').text(JData.late);
+        },
+
+        error: function(xhr, ajaxOptions, thrownError){
+            console.log('失敗');
+            console.log(xhr.responseText);
+            console.log(xhr.status);
+            console.log(thrownError);
+        }
+    });
+
+
+
+
+
+
+
 
 
 
