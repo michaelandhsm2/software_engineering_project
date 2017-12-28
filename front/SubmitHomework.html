@@ -65,7 +65,7 @@
                     <td>HomeWork 1</td>
                     <td>2017/10/30</td>
                     <td class="text-warning">遲交</td>
-                    <td><a class="btn btn-info" href="homework_submit.html">上傳作業</a></td>
+                    <td><a class="btn btn-info" href="homework_submit.html?hw_id=6">上傳作業</a></td>
                     <td>68</td>
                     </tr>
                     <tr>
@@ -109,34 +109,34 @@
     console.log(user);
 
     // 取得課程清單
-    // $.ajax({
-    //     url: "http://140.124.183.30:8080/SE_pj/api/login",
-    //     data: {
-    //       'member_id': user.id,
-    //       'list_type': 'student'
-    //     },
-    //     type:"POST",
-    //     dataType:'json',
+    $.ajax({
+        url: "http://140.124.183.30:8080/SE_pj/api/class",
+        data: {
+          'member_id': user.id,
+          'list_type': 'student'
+        },
+        type:"POST",
+        dataType:'json',
 
-    //     success: function(JData){
-    //       console.log('成功');
-    //       console.log(JData);
+        success: function(JData){
+          console.log('成功');
+          console.log(JData);
           
-    //       $(".list-group").empty();
-    //       var i = 0;
-    //       $.each(JData, function() {
-    //         $(".list-group").append("<button class=\"list-group-item list-group-item-action\" onclick=\"clickCourse(this,"+ JData[i].course_id +")\">"+ JData[i].course_name +"</button>");
-    //         i++;
-    //       });
-    //     },
+          $(".list-group").empty();
+          var i = 0;
+          $.each(JData, function() {
+            $(".list-group").append("<button class=\"list-group-item list-group-item-action\" onclick=\"clickCourse(this,"+ JData[i].course_id +")\">"+ JData[i].course_name +"</button>");
+            i++;
+          });
+        },
 
-    //     error: function(xhr, ajaxOptions, thrownError){
-    //       console.log('失敗');
-    //       console.log(xhr.responseText);
-    //       console.log(xhr.status);
-    //       console.log(thrownError);
-    //     }
-    // });
+        error: function(xhr, ajaxOptions, thrownError){
+          console.log('失敗');
+          console.log(xhr.responseText);
+          console.log(xhr.status);
+          console.log(thrownError);
+        }
+    });
 
 
     function clickCourse(obj,course_id){
@@ -145,33 +145,34 @@
       console.log(course_id);
 
       // 取得作業清單
-      // $.ajax({
-      //   url: "http://140.124.183.30:8080/SE_pj/api/login",
-      //   data: {
-      //     'course_id': course_id
-      //   },
-      //   type:"POST",
-      //   dataType:'json',
+      $.ajax({
+        url: "http://140.124.183.30:8080/SE_pj/api/hw",
+        data: {
+          'member_id': user.id,
+          'course_id': course_id
+        },
+        type:"POST",
+        dataType:'json',
 
-      //   success: function(JData){
-      //     console.log('成功');
-      //     console.log(JData);
+        success: function(JData){
+          console.log('成功');
+          console.log(JData);
           
-      //     $("#tbody_hw").empty();
-      //     var i = 0;
-      //     $.each(JData, function() {
-      //       $("#tbody_hw").append("<tr><th scope=\"row\">1</th><td>"+ JData[i].hw_name +"</td><td>"+ JData[i].deadline +"</td><td class=\"text-warning\">"+ JData[i].shw_status +"</td><td><a class=\"btn btn-info\" href=\"homework_submit.html?id="+ JData[i].hw_id +"\">上傳作業</a></td><td>"+ JData[i].shw_fraction +"</td></tr>");
-      //       i++;
-      //     });
-      //   },
+          $("#tbody_hw").empty();
+          var i = 0;
+          $.each(JData, function() {
+            $("#tbody_hw").append("<tr><th scope=\"row\">1</th><td>"+ JData[i].hw_name +"</td><td>"+ JData[i].deadline +"</td><td class=\"text-warning\">"+ JData[i].shw_status +"</td><td><a class=\"btn btn-info\" href=\"homework_submit.html?hw_id="+ JData[i].hw_id +"\">上傳作業</a></td><td>"+ JData[i].shw_fraction +"</td></tr>");
+            i++;
+          });
+        },
 
-      //   error: function(xhr, ajaxOptions, thrownError){
-      //     console.log('失敗');
-      //     console.log(xhr.responseText);
-      //     console.log(xhr.status);
-      //     console.log(thrownError);
-      //   }
-      // });
+        error: function(xhr, ajaxOptions, thrownError){
+          console.log('失敗');
+          console.log(xhr.responseText);
+          console.log(xhr.status);
+          console.log(thrownError);
+        }
+      });
     }
 
 

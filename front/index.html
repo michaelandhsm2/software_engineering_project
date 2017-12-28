@@ -76,62 +76,66 @@
     <script>
       $("#btn_submit").click(function(){
 
-        var user = {
-          'id': '6',
-          'name': 'Alan',
-          'role': 'student'
-        }
+        // var user = {
+        //   'id': '6',
+        //   'name': 'Alan',
+        //   'role': 'student'
+        // }
 
-        window.sessionStorage.setItem("user", JSON.stringify(user));
-        switch (user.role) {
-          case 'student':
-            location.href= ("SubmitHomework.html");
-            break;
         
-          default:
-            break;
-        }
         
 
         
 
 
 
-          // $.ajax({
-          //     url: "http://140.124.183.30:8080/SE_pj/api/login",
-          //     data: {
-          //       'account': $("#acc").val(),
-          //       'password': $("#pwd").val()
-          //     },
-          //     type:"POST",
-          //     dataType:'json',
+          $.ajax({
+              url: "http://140.124.183.30:8080/SE_pj/api/login",
+              data: {
+                'account': $("#acc").val(),
+                'password': $("#pwd").val()
+              },
+              type:"POST",
+              dataType:'json',
       
-          //     success: function(JData){
-          //       console.log('成功');
-          //       console.log(JData);
-          //       console.log(JData.member_id);
-          //       console.log(JData.member_name);
-          //       console.log(JData.permissions);
+              success: function(JData){
+                console.log('成功');
+                console.log(JData);
+                console.log(JData.member_id);
+                console.log(JData.member_name);
+                console.log(JData.permissions);
 
 
 
-          //       var user = {
-          //         'id': JData.member_id,
-          //         'name': JData.member_name,
-          //         'role': JData.permissions
-          //       }
+                var user = {
+                  'id': JData.member_id,
+                  'name': JData.member_name,
+                  'role': JData.permissions
+                }
 
-          //       window.sessionStorage.setItem("user", JSON.stringify(user));
-          //       location.href= ("index.html");
-          //     },
+                window.sessionStorage.setItem("user", JSON.stringify(user));
+
+                switch (user.role) {
+                  case 'student':
+                    location.href= ("SubmitHomework.html");
+                    break;
+                  case 'teacher':
+                    location.href= ("SubmitHomework.html");
+                    break;
+                
+                  default:
+                    break;
+                }
+
+              },
       
-          //     error: function(xhr, ajaxOptions, thrownError){
-          //       console.log('失敗');
-          //       console.log(xhr.responseText);
-          //       console.log(xhr.status);
-          //       console.log(thrownError);
-          //     }
-          // });
+              error: function(xhr, ajaxOptions, thrownError){
+                console.log('失敗');
+                console.log(xhr.responseText);
+                console.log(xhr.status);
+                console.log(thrownError);
+              }
+          });
       });
       </script>
   </body>

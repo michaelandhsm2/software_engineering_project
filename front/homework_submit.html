@@ -103,6 +103,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     
     <script>
+
+    var hw_id = getParameter("hw_id");
+    console.log(hw_id);
+
+    function getParameter(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+
+
     $("#btn_submit").click(function(){
         $.ajax({
             url: 'http://140.124.183.30:8080/SE_pj/api/register',
