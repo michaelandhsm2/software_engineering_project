@@ -17,7 +17,7 @@
     </style>
   </head>
   <body>
-    
+
     <form>
         <div class="form-group row">
             <label for="" class="col-sm-2 col-form-label">帳號</label>
@@ -35,7 +35,7 @@
             <button type="button" class="btn btn-primary" onclick="test()">確認新增</button>
         </div>
     </form>
-    
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -51,21 +51,21 @@
     <script>
     function test(){
         $.ajax({
-            url: "http://140.124.183.30:8080/SE_pj/api/register",
+            url: "http://127.0.0.1:8080/SE_final/api/register",
             data: {
             'customerId': '123'
             },
             type:"POST",
             dataType:'text',
-    
+
             success: function(msg){
                 alert(msg);
             },
-    
+
             error:function(xhr, ajaxOptions, thrownError){
                 console.log(xhr.responseText);
-                // alert(xhr.status); 
-                // alert(thrownError); 
+                // alert(xhr.status);
+                // alert(thrownError);
             }
         });
     }

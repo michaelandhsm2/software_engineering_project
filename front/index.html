@@ -61,7 +61,7 @@
         </form>
       </div>
     </div>
-    
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -76,14 +76,14 @@
     <script>
       $("#btn_submit").click(function(){
           $.ajax({
-              url: "http://140.124.183.30:8080/SE_pj/api/login",
+              url: "http://127.0.0.1:8080/SE_final/api/login",
               data: {
                 'account': $("#acc").val(),
                 'password': $("#pwd").val()
               },
               type:"POST",
               dataType:'json',
-      
+
               success: function(JData){
                 console.log('成功');
                 console.log(JData);
@@ -108,13 +108,13 @@
                   case 'teacher':
                     location.href= ("SubmitHomework.html");
                     break;
-                
+
                   default:
                     break;
                 }
 
               },
-      
+
               error: function(xhr, ajaxOptions, thrownError){
                 console.log('失敗');
                 console.log(xhr.responseText);

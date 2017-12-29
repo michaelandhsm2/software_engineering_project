@@ -8,7 +8,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link rel="stylesheet" href="main_style.css">
+    <link rel="stylesheet" href="css/main_style.css">
     <style>
       .div_body{
           padding: 10px 0;
@@ -27,7 +27,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-      
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
@@ -73,39 +73,45 @@
                 <div class="form-group row">
                     <label for="" class="col-sm-2 col-form-label">作業檔案</label>
                     <div class="col-sm-10">
-                        <input type="file" class="form-control-file" id="">
+                        <input type="file" class="form-control-file" name="shw_file">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="" class="col-sm-2 col-form-label">補充說明</label>
                     <div class="col-sm-10">
-                        <textarea class="form-control" id="" rows="3" placeholder="請輸入補充說明"></textarea>
+                        <textarea class="form-control" name="shw_description" rows="3" placeholder="請輸入補充說明"></textarea>
                     </div>
                 </div>
                 <div class="div_foot">
                     <button type="button" class="btn btn-primary" id="btn_submit">確認上傳</button>
                 </div>
+                  <input type="hidden" name="hw_id" id="hw_id">
+                  <input type="hidden" name="member_id" id="member_id">
                 </form>
             </div>
         </div>
       </div>
     </div>
-    
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-    
+
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    
+
     <script>
     // 取得get
     var hw_id = getParameter("hw_id");
     console.log(hw_id);
+    $('#hw_id').val(hw_id);
+
+    // TODO: Make member_id dynamic!!!!!!!!!!!
+    $('#member_id').val(1);
 
     function getParameter(name, url) {
         if (!url) url = window.location.href;
@@ -121,7 +127,7 @@
 
     // 顯示作業資訊
     $.ajax({
-        url: "http://140.124.183.30:8080/SE_pj/api/login",
+        url: 'http://127.0.0.1:8080/SE_final/api/unitHwContent',
         data: {
             'hw_id': hw_id
         },
@@ -155,8 +161,9 @@
 
 
     $("#btn_submit").click(function(){
+      console.log('btn_submit pressed');
         $.ajax({
-            url: 'http://140.124.183.30:8080/SE_pj/api/register',
+            url: 'http://127.0.0.1:8080/SE_final/api/upload',
             type: 'POST',
             cache: false,
             data: new FormData($('#uploadForm')[0]),
@@ -166,7 +173,7 @@
         }).fail(function(res) {});
     });
 
-    
+
     </script>
   </body>
 </html>

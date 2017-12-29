@@ -17,7 +17,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-      
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
@@ -90,7 +90,7 @@
         </div>
       </div>
     </div>
-    
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -110,7 +110,7 @@
 
     // 取得課程清單
     $.ajax({
-        url: "http://140.124.183.30:8080/SE_pj/api/class",
+        url: "http://127.0.0.1:8080/SE_final/api/class",
         data: {
           'member_id': user.id,
           'list_type': 'student'
@@ -121,7 +121,7 @@
         success: function(JData){
           console.log('成功');
           console.log(JData);
-          
+
           $(".list-group").empty();
           var i = 0;
           $.each(JData, function() {
@@ -146,7 +146,7 @@
 
       // 取得作業清單
       $.ajax({
-        url: "http://140.124.183.30:8080/SE_pj/api/hwDetail",
+        url: "http://127.0.0.1:8080/SE_final/api/hwDetail",
         data: {
           'member_id': user.id,
           'course_id': course_id
@@ -157,7 +157,7 @@
         success: function(JData){
           console.log('成功');
           console.log(JData);
-          
+
           $("#tbody_hw").empty();
           var i = 0;
           $.each(JData, function() {
