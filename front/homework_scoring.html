@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link rel="stylesheet" href="main_style.css">
     <style>
+      .div_body{
+        padding: 10px 0;
+        max-width: 800px;
+        margin: 0 auto;
+      }
       .div_foot{
         text-align: center;
       }
@@ -39,71 +44,31 @@
     </header>
     <div class="container-fluid">
       <div class="div_body">
-        <h3>作業 1</h3>
+        <!-- <h3>作業 1</h3> -->
         <form action="">
-        <table class="table table-hover table-bordered">
-            <thead>
+        <table class="table table-bordered">
+            <tbody>
                 <tr>
-                <th scope="col">#</th>
-                <th scope="col">學生姓名</th>
-                <th scope="col">繳交時間</th>
-                <th scope="col">繳交狀態</th>
-                <th scope="col">分數</th>
-                <th scope="col">評語</th>
-                <th scope="col">操作</th>
-                </tr>
-            </thead>
-            <tbody id="tbody_shw">
-                <tr>
-                    <th scope="row">1</th>
-                    <td>學生 1</td>
-                    <td>2017/10/19 16:20:00</td>
-                    <td class="text-warning">遲交</td>
-                    <td>68</td>
-                    <td></td>
-                    <td><a class="btn btn-info" href="homework_scoring.html?shw_id=1">編輯</a></td>
+                    <th scope="row">作業檔案</th>
+                    <td><a href="" id="a_file">檔案下載</a></td>
                 </tr>
                 <tr>
-                    <th scope="row">2</th>
-                    <td>學生 2</td>
-                    <td>2017/10/19 16:20:00</td>
-                    <td class="text-success">已上傳</td>
-                    <td>85</td>
-                    <td></td>
-                    <td><a class="btn btn-info" href="homework_scoring.html?shw_id=2">編輯</a></td>
+                    <th scope="row">補充說明</th>
+                    <td id="td_description">無</td>
                 </tr>
                 <tr>
-                    <th scope="row">3</th>
-                    <td>學生 3</td>
-                    <td>2017/10/19 16:20:00</td>
-                    <td class="text-success">已上傳</td>
-                    <td>76</td>
-                    <td>部分不符合題目需求</td>
-                    <td><a class="btn btn-info" href="homework_scoring.html?shw_id=3">編輯</a></td>
+                    <th scope="row">分數</th>
+                    <td><input type="number" class="form-control" id="inp_fraction" value="68"></td>
                 </tr>
                 <tr>
-                    <th scope="row">4</th>
-                    <td>學生 4</td>
-                    <td></td>
-                    <td class="text-danger">未上傳</td>
-                    <td>0</td>
-                    <td></td>
-                    <td><a class="btn btn-info" href="homework_scoring.html?shw_id=1">編輯</a></td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td>學生 5</td>
-                    <td>2017/10/19 16:20:00</td>
-                    <td class="text-success">已上傳</td>
-                    <td>90</td>
-                    <td></td>
-                    <td><a class="btn btn-info" href="homework_scoring.html?shw_id=1">編輯</a></td>
+                    <th scope="row">評語</th>
+                    <td><input type="text" class="form-control" id="inp_comment" value="遲交分數折扣"></td>
                 </tr>
             </tbody>
         </table>
-        <!-- <div class="div_foot">
+        <div class="div_foot">
           <button type="button" class="btn btn-primary">確認更新</button>
-        </div> -->
+        </div>
         </form>
       </div>
     </div>
@@ -121,8 +86,8 @@
     
     <script>
     // 取得get
-    var hw_id = getParameter("hw_id");
-    console.log(hw_id);
+    var shw_id = getParameter("shw_id");
+    console.log(shw_id);
 
     function getParameter(name, url) {
         if (!url) url = window.location.href;
@@ -136,11 +101,11 @@
 
 
 
-    // 顯示作業資訊
+    // 顯示
     $.ajax({
         url: "http://140.124.183.30:8080/SE_pj/api/login",
         data: {
-            'hw_id': hw_id
+            'shw_id': shw_id
         },
         type:"POST",
         dataType:'json',
@@ -148,13 +113,35 @@
         success: function(JData){
             console.log('成功');
             console.log(JData);
+            $('#a_file').attr("href","");
+            $('#td_description').text(JData.shw_description);
+            $('#inp_fraction').val(JData.shw_fraction);
+            $('#inp_comment').val(JData.shw_comment);
+        },
 
-            $("#tbody_shw").empty();
-            var i = 0;
-            $.each(JData, function() {
-              $("#tbody_shw").append("<th scope=\"row\">3</th><td>"+ JData[i].member_name +"</td><td>"+ JData[i].shw_time +"</td><td class=\"text-success\">"+ JData[i].shw_status +"</td><td>"+ JData[i].shw_fraction +"</td><td>"+ JData[i].shw_comment +"</td><td><a class=\"btn btn-info\" href=\"homework_scoring.html?shw_id="+ JData[i].shw_id +"\">編輯</a></td>");
-              i++;
-            });
+        error: function(xhr, ajaxOptions, thrownError){
+            console.log('失敗');
+            console.log(xhr.responseText);
+            console.log(xhr.status);
+            console.log(thrownError);
+        }
+    });
+
+
+    // 更新
+    $.ajax({
+        url: "http://140.124.183.30:8080/SE_pj/api/login",
+        data: {
+            'shw_id': shw_id,
+            'shw_fraction': $('#inp_fraction').val(),
+            'shw_comment': $('#inp_comment').val()
+        },
+        type:"POST",
+        dataType:'json',
+
+        success: function(JData){
+            console.log('成功');
+            location.href= ("homework_audit.html");
         },
 
         error: function(xhr, ajaxOptions, thrownError){
