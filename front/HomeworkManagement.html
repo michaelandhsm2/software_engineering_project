@@ -41,9 +41,9 @@
                         課程
                     </div>
                     <div class="list-group list-group-flush">
-                        <a href="#" class="list-group-item list-group-item-action active">軟體工程</a>
-                        <a href="#" class="list-group-item list-group-item-action">作業系統</a>
-                        <a href="#" class="list-group-item list-group-item-action">樣式導向軟體設計</a>
+                        <button class="list-group-item list-group-item-action active" onclick="clickCourse(this,1)">軟體工程</button>
+                        <button class="list-group-item list-group-item-action" onclick="clickCourse(this,2)">作業系統</button>
+                        <button class="list-group-item list-group-item-action" onclick="clickCourse(this,3)">樣式導向軟體設計</button>
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                     <th scope="col">操作</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbody_hw">
                     <tr>
                     <th scope="row">1</th>
                     <td>HomeWork 1</td>
@@ -117,34 +117,34 @@
     console.log(user);
 
     // 取得課程清單
-    // $.ajax({
-    //     url: "http://140.124.183.30:8080/SE_pj/api/login",
-    //     data: {
-    //       'member_id': user.id,
-    //       'list_type': 'student'
-    //     },
-    //     type:"POST",
-    //     dataType:'json',
+    $.ajax({
+        url: "http://140.124.183.30:8080/SE_pj/api/class",
+        data: {
+          'member_id': user.id,
+          'list_type': 'teacher'
+        },
+        type:"POST",
+        dataType:'json',
 
-    //     success: function(JData){
-    //       console.log('成功');
-    //       console.log(JData);
+        success: function(JData){
+          console.log('成功');
+          console.log(JData);
           
-    //       $(".list-group").empty();
-    //       var i = 0;
-    //       $.each(JData, function() {
-    //         $(".list-group").append("<button class=\"list-group-item list-group-item-action\" onclick=\"clickCourse(this,"+ JData[i].course_id +")\">"+ JData[i].course_name +"</button>");
-    //         i++;
-    //       });
-    //     },
+          $(".list-group").empty();
+          var i = 0;
+          $.each(JData, function() {
+            $(".list-group").append("<button class=\"list-group-item list-group-item-action\" onclick=\"clickCourse(this,"+ JData[i].course_id +")\">"+ JData[i].course_name +"</button>");
+            i++;
+          });
+        },
 
-    //     error: function(xhr, ajaxOptions, thrownError){
-    //       console.log('失敗');
-    //       console.log(xhr.responseText);
-    //       console.log(xhr.status);
-    //       console.log(thrownError);
-    //     }
-    // });
+        error: function(xhr, ajaxOptions, thrownError){
+          console.log('失敗');
+          console.log(xhr.responseText);
+          console.log(xhr.status);
+          console.log(thrownError);
+        }
+    });
 
 
     function clickCourse(obj,course_id){
@@ -153,33 +153,33 @@
       console.log(course_id);
 
       // 取得作業清單
-      // $.ajax({
-      //   url: "http://140.124.183.30:8080/SE_pj/api/login",
-      //   data: {
-      //     'course_id': course_id
-      //   },
-      //   type:"POST",
-      //   dataType:'json',
+      $.ajax({
+        url: "http://140.124.183.30:8080/SE_pj/api/hwClassAll",
+        data: {
+          'course_id': course_id
+        },
+        type:"POST",
+        dataType:'json',
 
-      //   success: function(JData){
-      //     console.log('成功');
-      //     console.log(JData);
+        success: function(JData){
+          console.log('成功');
+          console.log(JData);
           
-      //     $("#tbody_hw").empty();
-      //     var i = 0;
-      //     $.each(JData, function() {
-      //       $("#tbody_hw").append("<tr><th scope=\"row\">1</th><td>"+ JData[i].hw_name +"</td><td>"+ JData[i].deadline +"</td><td class=\"text-warning\">"+ JData[i].shw_status +"</td><td><a class=\"btn btn-info\" href=\"homework_submit.html?id="+ JData[i].hw_id +"\">上傳作業</a></td><td>"+ JData[i].shw_fraction +"</td></tr>");
-      //       i++;
-      //     });
-      //   },
+          $("#tbody_hw").empty();
+          var i = 0;
+          $.each(JData, function() {
+            $("#tbody_hw").append("<tr><th scope=\"row\">1</th><td>"+ JData[i].hw_name +"</td><td>"+ JData[i].deadline +"</td><td class=\"text-success\">"+ JData[i].late +"</td><td><a class=\"btn btn-info\" href=\"homework_audit.html?hw_id="+ JData[i].hw_id +"\">審核</a></td><td><a class=\"btn btn-info\" href=\"homework_report.html?hw_id="+ JData[i].hw_id +"\">檢視</a></td><td><a class=\"btn btn-info\" href=\"\">編輯</a></td></tr>");
+            i++;
+          });
+        },
 
-      //   error: function(xhr, ajaxOptions, thrownError){
-      //     console.log('失敗');
-      //     console.log(xhr.responseText);
-      //     console.log(xhr.status);
-      //     console.log(thrownError);
-      //   }
-      // });
+        error: function(xhr, ajaxOptions, thrownError){
+          console.log('失敗');
+          console.log(xhr.responseText);
+          console.log(xhr.status);
+          console.log(thrownError);
+        }
+      });
     }
 
 

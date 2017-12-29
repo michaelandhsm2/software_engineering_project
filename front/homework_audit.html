@@ -60,7 +60,7 @@
                     <td>2017/10/19 16:20:00</td>
                     <td class="text-warning">遲交</td>
                     <td><a class="btn btn-info" href="">下載</a></td>
-                    <td><input type="number" class="form-control" value="68"></td>
+                    <td><input type="number" class="form-control" id="" value="68"></td>
                     <td><input type="text" class="form-control" value=""></td>
                 </tr>
                 <tr>
@@ -152,7 +152,7 @@
             $("#tbody_shw").empty();
             var i = 0;
             $.each(JData, function() {
-              $("#tbody_shw").append("<tr><th scope=\"row\">3</th><td>學生 3</td><td>2017/10/19 16:20:00</td><td class=\"text-success\">已上傳</td><td><a class=\"btn btn-info\" href=\"\">下載</a></td><td><input type=\"number\" class=\"form-control\" value=\"76\"></td><td><input type=\"text\" class=\"form-control\" value=\"部分不符合題目需求\"></td></tr>");
+              $("#tbody_shw").append("<tr><th scope=\"row\">3</th><td>"+ JData[i].member_name +"</td><td>"+ JData[i].shw_time +"</td><td class=\"text-success\">"+ JData[i].shw_status +"</td><td><a class=\"btn btn-info\" href=\"\">下載</a></td><td><input type=\"number\" class=\"form-control\" value=\""+ JData[i].shw_fraction +"\"></td><td><input type=\"text\" class=\"form-control\" value=\""+ JData[i].shw_comment +"\"></td></tr>");
               i++;
             });
         },
@@ -166,16 +166,30 @@
     });
 
 
-
-
-
-
-
-
-
-
+    // 更新成績
     $("#btn_submit").click(function(){
+      $.ajax({
+        url: "http://140.124.183.30:8080/SE_pj/api/login",
+        data: {
+            'hw_id': hw_id
+        },
+        type:"POST",
+        dataType:'json',
 
+        success: function(JData){
+            console.log('成功');
+            // console.log(JData);
+
+            
+        },
+
+        error: function(xhr, ajaxOptions, thrownError){
+            console.log('失敗');
+            console.log(xhr.responseText);
+            console.log(xhr.status);
+            console.log(thrownError);
+        }
+      });
     });
 
     

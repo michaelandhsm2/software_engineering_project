@@ -106,6 +106,66 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+    //讀取session的user資料
+    var session_user = window.sessionStorage.getItem("user");
+    user = JSON.parse(session_user);
+    console.log(user);
+
+
+    // 取得get
+    // var hw_id = getParameter("hw_id");
+    // console.log(hw_id);
+
+    function getParameter(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+
+
+    $.ajax({
+        url: "http://140.124.183.30:8080/SE_pj/api/hwClassAll",
+        data: {
+          'member_id': user.id,
+          'course_id': '1'
+        },
+        type:"POST",
+        dataType:'json',
+
+        success: function(JData){
+          console.log('成功');
+          console.log(JData);
+          
+        //   $("#tbody_hw").empty();
+        //   var i = 0;
+        //   $.each(JData, function() {
+        //     $("#tbody_hw").append("<tr><th scope=\"row\">1</th><td>"+ JData[i].hw_name +"</td><td>"+ JData[i].deadline +"</td><td class=\"text-success\">"+ JData[i].late +"</td><td><a class=\"btn btn-info\" href=\"homework_audit.html?hw_id="+ JData[i].hw_id +"\">審核</a></td><td><a class=\"btn btn-info\" href=\"homework_report.html?hw_id="+ JData[i].hw_id +"\">檢視</a></td><td><a class=\"btn btn-info\" href=\"\">編輯</a></td></tr>");
+        //     i++;
+        //   });
+        },
+
+        error: function(xhr, ajaxOptions, thrownError){
+          console.log('失敗');
+          console.log(xhr.responseText);
+          console.log(xhr.status);
+          console.log(thrownError);
+        }
+    });
+    </script>
+
+
+
+
     <!-- Highcharts -->
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script>
