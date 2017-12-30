@@ -113,7 +113,7 @@
         success: function(JData){
             console.log('成功');
             console.log(JData);
-            $('#a_file').attr("href","");
+            $('#a_file').attr("href","http://127.0.0.1:8080/SE_final/api/download/" + JData.shw_file);
             $('#td_description').text(JData.shw_description);
             $('#inp_fraction').val(JData.shw_fraction);
             $('#inp_comment').val(JData.shw_comment);
