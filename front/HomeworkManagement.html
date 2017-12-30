@@ -41,16 +41,16 @@
                         課程
                     </div>
                     <div class="list-group list-group-flush">
-                        <a href="#" class="list-group-item list-group-item-action active">軟體工程</a>
-                        <a href="#" class="list-group-item list-group-item-action">作業系統</a>
-                        <a href="#" class="list-group-item list-group-item-action">樣式導向軟體設計</a>
+                        <button class="list-group-item list-group-item-action active" onclick="clickCourse(this,1)">軟體工程</button>
+                        <button class="list-group-item list-group-item-action" onclick="clickCourse(this,2)">作業系統</button>
+                        <button class="list-group-item list-group-item-action" onclick="clickCourse(this,3)">樣式導向軟體設計</button>
                     </div>
                 </div>
             </div>
             <div class="col-10">
-                <div>
+                <!-- <div>
                   <p>助教: 助教A <a href="">(設定)</a></p>
-                </div>
+                </div> -->
                 <table class="table table-hover table-bordered">
                 <thead>
                     <tr>
@@ -69,8 +69,8 @@
                     <td>Template</td>
                     <td>2017/10/30</td>
                     <td class="text-success">開放</td>
-                    <td><a class="btn btn-info" href="homework_audit.html">審核</a></td>
-                    <td><a class="btn btn-info" href="homework_report.html">檢視</a></td>
+                    <td><a class="btn btn-info" href="homework_audit.html?hw_id=1">審核</a></td>
+                    <td><a class="btn btn-info" href="homework_report.html?hw_id=1">檢視</a></td>
                     <td><a class="btn btn-info" href="">編輯</a></td>
                     </tr>
                 </tbody>
@@ -155,7 +155,7 @@
           $("#tbody_hw").empty();
           var i = 0;
           $.each(JData, function() {
-            $("#tbody_hw").append("<tr><th scope=\"row\">1</th><td>"+ JData[i].hw_name +"</td><td>"+ JData[i].deadline +"</td><td class=\"text-warning\">"+ JData[i].shw_status +"</td><td><a class=\"btn btn-info\" href=\"homework_submit.html?id="+ JData[i].hw_id +"\">上傳作業</a></td><td>"+ JData[i].shw_fraction +"</td></tr>");
+            $("#tbody_hw").append("<tr><th scope=\"row\">1</th><td>"+ JData[i].hw_name +"</td><td>"+ JData[i].deadline +"</td><td class=\"text-success\">"+ JData[i].late +"</td><td><a class=\"btn btn-info\" href=\"homework_audit.html?hw_id="+ JData[i].hw_id +"\">審核</a></td><td><a class=\"btn btn-info\" href=\"homework_report.html?hw_id="+ JData[i].hw_id +"\">檢視</a></td><td><a class=\"btn btn-info\" href=\"\">編輯</a></td></tr>");
             i++;
           });
         },
