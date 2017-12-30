@@ -152,25 +152,29 @@
     });
 
 
-
-
-
-
-
-
-
-
     $("#btn_submit").click(function(){
       console.log('btn_submit pressed');
+      console.log(new FormData($('#uploadForm')[0]));
         $.ajax({
             url: 'http://127.0.0.1:8080/SE_final/api/upload',
             type: 'POST',
             cache: false,
             data: new FormData($('#uploadForm')[0]),
             processData: false,
-            contentType: false
-        }).done(function(res) {
-        }).fail(function(res) {});
+            contentType: false,
+
+            success: function(e){
+                console.log('成功');
+
+            },
+
+            error: function(xhr, ajaxOptions, thrownError){
+                console.log('失敗');
+                console.log(xhr.responseText);
+                console.log(xhr.status);
+                console.log(thrownError);
+            }
+        });
     });
 
 

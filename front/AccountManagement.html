@@ -52,65 +52,56 @@
               <th scope="col">#</th>
               <th scope="col">姓名</th>
               <th scope="col">權限</th>
-              <th scope="col">E-Mail</th>
               <th scope="col">帳號</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="tr-group">
             <tr>
               <th scope="row">1</th>
               <td>管理員 1</td>
               <td>管理員</td>
-              <td>admin1@ntut.edu.tw</td>
               <td>admin_ntut</td>
             </tr>
             <tr>
               <th scope="row">2</th>
               <td>教師 1</td>
               <td>教師</td>
-              <td>teacher1@ntut.edu.tw</td>
               <td>teacher1</td>
             </tr>
             <tr>
               <th scope="row">3</th>
               <td>教師 2</td>
               <td>教師</td>
-              <td>teacher2@ntut.edu.tw</td>
               <td>teacher2</td>
             </tr>
             <tr>
               <th scope="row">7</th>
               <td>學生 1</td>
               <td>學生</td>
-              <td>t106598001@ntut.edu.tw</td>
               <td>106598001</td>
             </tr>
             <tr>
               <th scope="row">8</th>
               <td>學生 2</td>
               <td>學生</td>
-              <td>t106598002@ntut.edu.tw</td>
               <td>106598002</td>
             </tr>
             <tr>
               <th scope="row">9</th>
               <td>學生 3</td>
               <td>學生</td>
-              <td>t106598003@ntut.edu.tw</td>
               <td>106598003</td>
             </tr>
             <tr>
               <th scope="row">10</th>
               <td>學生 4</td>
               <td>學生</td>
-              <td>t106598004@ntut.edu.tw</td>
               <td>106598004</td>
             </tr>
             <tr>
               <th scope="row">11</th>
               <td>學生 5</td>
               <td>學生</td>
-              <td>t106598005@ntut.edu.tw</td>
               <td>106598005</td>
             </tr>
           </tbody>
@@ -132,5 +123,45 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+
+            <!-- jQuery -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+
+    $.ajax({
+        url: "http://127.0.0.1:8080/SE_final/api/getUser",
+        data: {
+            'user_id': 1
+        },
+        type:"POST",
+        dataType:'json',
+
+        success: function(JData){
+          console.log('成功');
+          console.log(JData);
+
+          $(".tr-group").empty();
+          var i = 0;
+          $.each(JData, function() {
+            $(".tr-group").append("<tr>\
+              <th scope=\"row\">"+JData[i].member_id+"</th>\
+              <td>"+JData[i].member_name+"</td>\
+              <td>"+JData[i].permissions+"</td>\
+              <td>"+JData[i].member_account+"</td>\
+            </tr>");
+            i++;
+          });
+        },
+
+        error: function(xhr, ajaxOptions, thrownError){
+          console.log('失敗');
+          console.log(xhr.responseText);
+          console.log(xhr.status);
+          console.log(thrownError);
+        }
+    });
+    </script>
   </body>
 </html>

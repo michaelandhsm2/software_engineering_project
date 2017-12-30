@@ -63,37 +63,19 @@
                     <th scope="col">操作</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbody_hw">
                     <tr>
                     <th scope="row">1</th>
-                    <td>HomeWork 1</td>
+                    <td>Template</td>
                     <td>2017/10/30</td>
                     <td class="text-success">開放</td>
                     <td><a class="btn btn-info" href="homework_audit.html">審核</a></td>
                     <td><a class="btn btn-info" href="homework_report.html">檢視</a></td>
                     <td><a class="btn btn-info" href="">編輯</a></td>
                     </tr>
-                    <tr>
-                    <th scope="row">2</th>
-                    <td>HomeWork 2</td>
-                    <td>2017/11/16</td>
-                    <td class="text-success">開放</td>
-                    <td><a class="btn btn-info" href="">審核</a></td>
-                    <td><a class="btn btn-info" href="">檢視</a></td>
-                    <td><a class="btn btn-info" href="">編輯</a></td>
-                    </tr>
-                    <tr>
-                    <th scope="row">3</th>
-                    <td>HomeWork 3</td>
-                    <td>2017/12/8</td>
-                    <td class="text-danger">關閉</td>
-                    <td><a class="btn btn-info" href="">審核</a></td>
-                    <td><a class="btn btn-info" href="">檢視</a></td>
-                    <td><a class="btn btn-info" href="">編輯</a></td>
-                    </tr>
                 </tbody>
                 </table>
-                <a class="btn btn-success btn-block" href="homework_new.html">新增作業</a>
+                <a class="btn btn-success btn-block" id="newHw">新增作業</a>
             </div>
         </div>
       </div>
@@ -117,34 +99,34 @@
     console.log(user);
 
     // 取得課程清單
-    // $.ajax({
-    //     url: "http://127.0.0.1:8080/SE_final/api/login",
-    //     data: {
-    //       'member_id': user.id,
-    //       'list_type': 'student'
-    //     },
-    //     type:"POST",
-    //     dataType:'json',
+    $.ajax({
+        url: "http://127.0.0.1:8080/SE_final/api/class",
+        data: {
+          'member_id': user.id,
+          'list_type': user.role
+        },
+        type:"POST",
+        dataType:'json',
 
-    //     success: function(JData){
-    //       console.log('成功');
-    //       console.log(JData);
+        success: function(JData){
+          console.log('成功');
+          console.log(JData);
 
-    //       $(".list-group").empty();
-    //       var i = 0;
-    //       $.each(JData, function() {
-    //         $(".list-group").append("<button class=\"list-group-item list-group-item-action\" onclick=\"clickCourse(this,"+ JData[i].course_id +")\">"+ JData[i].course_name +"</button>");
-    //         i++;
-    //       });
-    //     },
+          $(".list-group").empty();
+          var i = 0;
+          $.each(JData, function() {
+            $(".list-group").append("<button class=\"list-group-item list-group-item-action\" onclick=\"clickCourse(this,"+ JData[i].course_id +")\">"+ JData[i].course_name +"</button>");
+            i++;
+          });
+        },
 
-    //     error: function(xhr, ajaxOptions, thrownError){
-    //       console.log('失敗');
-    //       console.log(xhr.responseText);
-    //       console.log(xhr.status);
-    //       console.log(thrownError);
-    //     }
-    // });
+        error: function(xhr, ajaxOptions, thrownError){
+          console.log('失敗');
+          console.log(xhr.responseText);
+          console.log(xhr.status);
+          console.log(thrownError);
+        }
+    });
 
 
     function clickCourse(obj,course_id){
@@ -152,35 +134,41 @@
       $(obj).addClass('active');
       console.log(course_id);
 
+      $('#newHw').off();
+      $("#newHw").on("click", function(){
+          location.href= ("homework_new.html?courseId="+course_id);
+      });
+
       // 取得作業清單
-      // $.ajax({
-      //   url: "http://127.0.0.1:8080/SE_final/api/login",
-      //   data: {
-      //     'course_id': course_id
-      //   },
-      //   type:"POST",
-      //   dataType:'json',
+      $.ajax({
+        url: "http://127.0.0.1:8080/SE_final/api/hwClassAll",
+        data: {
+          'course_id': course_id
+        },
+        type:"POST",
+        dataType:'json',
 
-      //   success: function(JData){
-      //     console.log('成功');
-      //     console.log(JData);
+        success: function(JData){
+          console.log('成功');
+          console.log(JData);
 
-      //     $("#tbody_hw").empty();
-      //     var i = 0;
-      //     $.each(JData, function() {
-      //       $("#tbody_hw").append("<tr><th scope=\"row\">1</th><td>"+ JData[i].hw_name +"</td><td>"+ JData[i].deadline +"</td><td class=\"text-warning\">"+ JData[i].shw_status +"</td><td><a class=\"btn btn-info\" href=\"homework_submit.html?id="+ JData[i].hw_id +"\">上傳作業</a></td><td>"+ JData[i].shw_fraction +"</td></tr>");
-      //       i++;
-      //     });
-      //   },
+          $("#tbody_hw").empty();
+          var i = 0;
+          $.each(JData, function() {
+            $("#tbody_hw").append("<tr><th scope=\"row\">1</th><td>"+ JData[i].hw_name +"</td><td>"+ JData[i].deadline +"</td><td class=\"text-warning\">"+ JData[i].shw_status +"</td><td><a class=\"btn btn-info\" href=\"homework_submit.html?id="+ JData[i].hw_id +"\">上傳作業</a></td><td>"+ JData[i].shw_fraction +"</td></tr>");
+            i++;
+          });
+        },
 
-      //   error: function(xhr, ajaxOptions, thrownError){
-      //     console.log('失敗');
-      //     console.log(xhr.responseText);
-      //     console.log(xhr.status);
-      //     console.log(thrownError);
-      //   }
-      // });
+        error: function(xhr, ajaxOptions, thrownError){
+          console.log('失敗');
+          console.log(xhr.responseText);
+          console.log(xhr.status);
+          console.log(thrownError);
+        }
+      });
     }
+
 
 
     </script>

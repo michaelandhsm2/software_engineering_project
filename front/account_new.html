@@ -1,110 +1,127 @@
 <!doctype html>
 <html lang="zh-Hant">
-  <head>
-    <title>PASS</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/main_style.css">
-    <style>
-      .div_body{
-          padding: 10px 0;
-          max-width: 800px;
-          margin: 0 auto;
-      }
-      .div_foot{
-        text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">PASS</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<head>
+  <title>PASS</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/main_style.css">
+  <style>
+    .div_body {
+      padding: 10px 0;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .div_foot {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">PASS</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="AccountManagement.html">帳號管理 <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="CourseManagement.html">課程管理</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="StudentManagement.html">學生管理</a>
-            </li>
-          </ul>
-          <span class="navbar-text">教師</span>
-          <button type="button" class="btn btn-light">登出</button>
-        </div>
-      </nav>
-      <div class="div_headImg">
-        <img src="img/bg2.jpg" alt="image">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="AccountManagement.html">帳號管理 <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="CourseManagement.html">課程管理</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="StudentManagement.html">學生管理</a>
+          </li>
+        </ul>
+        <span class="navbar-text">教師</span>
+        <button type="button" class="btn btn-light">登出</button>
       </div>
-    </header>
-    <div class="container-fluid">
-      <div class="div_body">
-            <div class="card">
-                <div class="card-header">
-                    新增帳號
-                </div>
-                <div class="card-body">
-                    <form>
-                    <div class="form-group row">
-                        <label for="" class="col-sm-2 col-form-label">姓名</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="" placeholder="請輸入姓名">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="" class="col-sm-2 col-form-label">帳號</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="" placeholder="請輸入帳號">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="" class="col-sm-2 col-form-label">密碼</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="" placeholder="請輸入密碼">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="" class="col-sm-2 col-form-label">E-Mail</label>
-                        <div class="col-sm-10">
-                            <input type="email" class="form-control" id="" placeholder="請輸入E-Mail">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="" class="col-sm-2 col-form-label">權限</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" id="">
-                                <option>學生</option>
-                                <option>助教</option>
-                                <option>教師</option>
-                                <option>管理員</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="div_foot">
-                        <button type="submit" class="btn btn-primary">確認新增</button>
-                    </div>
-                    </form>
-                </div>
+    </nav>
+    <div class="div_headImg">
+      <img src="img/bg2.jpg" alt="image">
+    </div>
+  </header>
+  <div class="container-fluid">
+    <div class="div_body">
+      <div class="card">
+        <div class="card-header">
+          新增帳號
+        </div>
+        <div class="card-body">
+          <form id="form">
+            <div class="form-group row">
+              <label for="" class="col-sm-2 col-form-label">姓名</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="username" placeholder="請輸入姓名">
+              </div>
             </div>
+            <div class="form-group row">
+              <label for="" class="col-sm-2 col-form-label">帳號</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="account" placeholder="請輸入帳號">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="" class="col-sm-2 col-form-label">密碼</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="password" placeholder="請輸入密碼">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="" class="col-sm-2 col-form-label">權限</label>
+              <div class="col-sm-10">
+                <select class="form-control" name="role">
+                                <option value="student">學生</option>
+                                <option value="ta">助教</option>
+                                <option value="teacher">教師</option>
+                                <option value="admin">管理員</option>
+                            </select>
+              </div>
+            </div>
+            <div class="div_foot">
+              <button type="submit" id="btn_submit" class="btn btn-primary">確認新增</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
+  </div>
 
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-  </body>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+
+      <!-- jQuery -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  <script type="text/javascript">
+    $("#btn_submit").click(function() {
+      console.log('btn_submit pressed');
+      $.ajax({
+        url: 'http://127.0.0.1:8080/SE_final/api/createUser',
+        type: 'POST',
+        cache: false,
+        data: new FormData($('#form')[0]),
+        processData: false,
+        contentType: false
+      }).done(function(res) {}).fail(function(res) {});
+    });
+  </script>
+
+</body>
+
 </html>
