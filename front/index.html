@@ -90,13 +90,15 @@
                 console.log(JData.member_id);
                 console.log(JData.member_name);
                 console.log(JData.permissions);
+                console.log(JData.member_account);
 
 
 
                 var user = {
                   'id': JData.member_id,
                   'name': JData.member_name,
-                  'role': JData.permissions
+                  'role': JData.permissions,
+                  'member_account': JData.member_account
                 }
 
                 window.sessionStorage.setItem("user", JSON.stringify(user));
