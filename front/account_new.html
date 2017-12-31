@@ -111,6 +111,8 @@
   <script type="text/javascript">
     $("#btn_submit").click(function() {
       console.log('btn_submit pressed');
+      var data = new FormData($('#form')[0]);
+      console.log(data);
       $.ajax({
         url: 'http://127.0.0.1:8080/SE_final/api/createUser',
         type: 'POST',
