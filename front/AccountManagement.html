@@ -50,68 +50,21 @@
           <thead>
             <tr>
               <th scope="col">#</th>
+              <th scope="col">帳號</th>
               <th scope="col">姓名</th>
               <th scope="col">權限</th>
-              <th scope="col">帳號</th>
             </tr>
           </thead>
           <tbody class="tr-group">
-            <tr>
-              <th scope="row">1</th>
-              <td>管理員 1</td>
-              <td>管理員</td>
-              <td>admin_ntut</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>教師 1</td>
-              <td>教師</td>
-              <td>teacher1</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>教師 2</td>
-              <td>教師</td>
-              <td>teacher2</td>
-            </tr>
-            <tr>
-              <th scope="row">7</th>
-              <td>學生 1</td>
-              <td>學生</td>
-              <td>106598001</td>
-            </tr>
-            <tr>
-              <th scope="row">8</th>
-              <td>學生 2</td>
-              <td>學生</td>
-              <td>106598002</td>
-            </tr>
-            <tr>
-              <th scope="row">9</th>
-              <td>學生 3</td>
-              <td>學生</td>
-              <td>106598003</td>
-            </tr>
-            <tr>
-              <th scope="row">10</th>
-              <td>學生 4</td>
-              <td>學生</td>
-              <td>106598004</td>
-            </tr>
-            <tr>
-              <th scope="row">11</th>
-              <td>學生 5</td>
-              <td>學生</td>
-              <td>106598005</td>
-            </tr>
           </tbody>
         </table>
         <div class="row">
           <div class="col">
-            <button type="button" class="btn btn-success btn-block">匯入帳號</button>
+            <button id="importAccount" type="button" class="btn btn-success btn-block">匯入帳號</button>
+            <input id="accountFile" type="file" style="display: none;" />
           </div>
           <div class="col">
-            <button type="button" class="btn btn-danger btn-block">清除帳號</button>
+            <button id="deleteAccount" type="button" class="btn btn-danger btn-block">清除帳號</button>
           </div>
         </div>
       </div>
@@ -127,8 +80,78 @@
 
             <!-- jQuery -->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+            <script src="js/papaparse.js"></script>
 
     <script type="text/javascript">
+    $('#importAccount').on('click', function() {
+        $('#accountFile').trigger('click');
+      });
+
+    $('#accountFile').change(function(evt) {
+        var file = evt.target.files[0];
+        Papa.parse(file, {
+          header: true,
+          delimiter: ",",
+          skipEmptyLines: true,
+          complete: function(results) {
+            var data = results.data;
+            for (key in data) {
+              var form_data = new FormData();
+              for ( var key2 in data[key] ) {
+                  form_data.append(key2, data[key][key2]);
+              }
+
+              $.ajax({
+                url: 'http://127.0.0.1:8080/SE_final/api/createUser',
+                type: 'POST',
+                cache: false,
+                data: form_data,
+                processData: false,
+                contentType: false,
+
+                success: function(e){
+                    console.log('成功');
+                    window.location.reload(false);
+                },
+
+                error: function(xhr, ajaxOptions, thrownError){
+                  console.log('失敗');
+                  console.log(xhr.responseText);
+                  console.log(xhr.status);
+                  console.log(thrownError);
+                }
+              });
+            }
+          }
+        });
+        $("#accountFile").val("");
+      });
+
+      $('#deleteAccount').on('click', function() {
+        $.ajax({
+          url: 'http://127.0.0.1:8080/SE_final/api/deleteUser',
+          type: 'POST',
+          cache: false,
+          data: {
+              'user_id': 1
+          },
+          processData: false,
+          contentType: false,
+
+          success: function(e){
+              console.log('成功');
+              window.location.reload(true);
+          },
+
+          error: function(xhr, ajaxOptions, thrownError){
+            console.log('失敗');
+            console.log(xhr.responseText);
+            console.log(xhr.status);
+            console.log(thrownError);
+          }
+        });
+        });
+
 
     $.ajax({
         url: "http://127.0.0.1:8080/SE_final/api/getUser",
@@ -140,16 +163,18 @@
 
         success: function(JData){
           console.log('成功');
+
+          JData.sort(function(a,b){return a.permissions.localeCompare(b.permissions)});
           console.log(JData);
 
           $(".tr-group").empty();
           var i = 0;
           $.each(JData, function() {
             $(".tr-group").append("<tr>\
-              <th scope=\"row\">"+JData[i].member_id+"</th>\
+              <th scope=\"row\">"+(i+1)+"</th>\
+              <td>"+JData[i].member_account+"</td>\
               <td>"+JData[i].member_name+"</td>\
               <td>"+JData[i].permissions+"</td>\
-              <td>"+JData[i].member_account+"</td>\
             </tr>");
             i++;
           });
