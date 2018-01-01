@@ -57,10 +57,10 @@
                 </thead>
                 <tbody>
                     <tr>
-                    <td>學生 1</td>
-                    <td>106598001</td>
-                    <td>資工碩一</td>
-                    <td>t106598001@ntut.edu.tw</td>
+                    <td id="td_name">學生 1</td>
+                    <td id="td_account">106598001</td>
+                    <td id="td_class">資工碩一</td>
+                    <td id="td_email">t106598001@ntut.edu.tw</td>
                     </tr>
                 </tbody>
             </table>
@@ -75,7 +75,7 @@
                 <th scope="col">分數</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tbody_hw">
                 <tr>
                     <th scope="row">1</th>
                     <td>HomeWork 1</td>
@@ -118,8 +118,10 @@
 
 
     // 取得get
-    // var hw_id = getParameter("hw_id");
-    // console.log(hw_id);
+    var member_id = getParameter("member_id");
+    console.log(member_id);
+    var course_id = getParameter("course_id");
+    console.log(course_id);
 
     function getParameter(name, url) {
         if (!url) url = window.location.href;
@@ -133,11 +135,29 @@
 
 
 
+    // 圖表資料
+    var self = new Array();
+    var class_average = new Array();
+    var hw_name = new Array();
+    var sum = 0;
+    var count = 0;
+    var average = 0;
+
+    // 測試
+    var self = new Array(73,82,60);
+    var class_average = new Array(81,56,76);
+    var hw_name = new Array('作業1','作業2','作業3');
+    var sum = 215;
+    var count = 3;
+    var average = sum/count;
+
+
+
     $.ajax({
         url: "http://140.124.183.30:8080/SE_pj/api/hwClassAll",
         data: {
-          'member_id': user.id,
-          'course_id': '1'
+          'member_id': member_id,
+          'course_id': course_id
         },
         type:"POST",
         dataType:'json',
@@ -145,13 +165,36 @@
         success: function(JData){
           console.log('成功');
           console.log(JData);
+
+          $('#td_name').text(JData.member_name);
+          $('#td_account').text(JData.member_account);
+          $('#td_class').text(JData.member_class);
+          $('#td_email').text(JData.member_email);
+
           
-        //   $("#tbody_hw").empty();
-        //   var i = 0;
-        //   $.each(JData, function() {
-        //     $("#tbody_hw").append("<tr><th scope=\"row\">1</th><td>"+ JData[i].hw_name +"</td><td>"+ JData[i].deadline +"</td><td class=\"text-success\">"+ JData[i].late +"</td><td><a class=\"btn btn-info\" href=\"homework_audit.html?hw_id="+ JData[i].hw_id +"\">審核</a></td><td><a class=\"btn btn-info\" href=\"homework_report.html?hw_id="+ JData[i].hw_id +"\">檢視</a></td><td><a class=\"btn btn-info\" href=\"\">編輯</a></td></tr>");
-        //     i++;
-        //   });
+          $("#tbody_hw").empty();
+          var i = 0;
+          $.each(JData.hw_list, function() {
+
+            self[i] = JData.hw_list[i].shw_fraction;
+            hw_name[i] = JData.hw_list[i].hw_name;
+
+            sum += JData.hw_list[i].shw_fraction;
+            count++;
+
+            $("#tbody_hw").append("<tr><th scope=\"row\">1</th><td>"+ JData.hw_list[i].hw_name +"</td><td class=\"text-warning\">"+ JData.hw_list[i].shw_status +"</td><td>"+ JData.hw_list[i].shw_fraction +"</td></tr>");
+            i++;
+          });
+
+          average = sum/count;
+
+
+          // 班級平均
+          var i = 0;
+          $.each(JData.hw_list, function() {
+            class_average[i] = JData.class_fraction[i];
+            i++;
+          });
         },
 
         error: function(xhr, ajaxOptions, thrownError){
@@ -178,10 +221,12 @@
                 text: '作業分數'
             },
             subtitle: {
-                text: '平均成績 : 63.8 分'
+                text: '平均成績 : '+ average.toFixed(2) +' 分'
+                // text: '平均成績 : 63.8 分'
             },
             xAxis: {
-                categories: ['HomeWork 1', 'HomeWork 2', 'HomeWork 3', 'HomeWork 4', 'HomeWork 5']
+                categories: hw_name
+                // categories: ['HomeWork 1', 'HomeWork 2', 'HomeWork 3', 'HomeWork 4', 'HomeWork 5']
             },
             yAxis: {
                 title: {
@@ -198,10 +243,12 @@
             },
             series: [{
                 name: '個人成績',
-                data: [68.0, 85.0, 76.0]
+                data: self
+                // data: [68.0, 85.0, 76.0]
             }, {
                 name: '班級平均',
-                data: [83.9, 78.5, 81.9]
+                data: class_average
+                // data: [83.9, 78.5, 81.9]
             }]
         });
     });
