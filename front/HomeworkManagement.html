@@ -152,7 +152,16 @@
           $("#tbody_hw").empty();
           var i = 0;
           $.each(JData, function() {
-            $("#tbody_hw").append("<tr><th scope=\"row\">"+(i+1)+"</th><td>"+ JData[i].hw_name +"</td><td>"+ dateFormatter(JData[i].deadline) +"</td><td class=\"text-success\">"+ JData[i].late +"</td><td><a class=\"btn btn-info\" href=\"homework_audit.html?hw_id="+ JData[i].hw_id +"\">審核</a></td><td><a class=\"btn btn-info\" href=\"homework_report.html?hw_id="+ JData[i].hw_id +"\">檢視</a></td><td><a class=\"btn btn-info\" href=\"\">編輯</a></td></tr>");
+            $("#tbody_hw").append("\
+            <tr>\
+              <th scope=\"row\">"+(i+1)+"</th>\
+              <td>"+ JData[i].hw_name +"</td>\
+              <td>"+ dateFormatter(JData[i].deadline) +"</td>\
+              <td class='"+(JData[i].late=="開放"? "text-success" : "text-danger")+"'>"+ JData[i].late +"</td>\
+              <td><a class=\"btn btn-info\" href=\"homework_audit.html?hw_id="+ JData[i].id +"\">審核</a></td>\
+              <td><a class=\"btn btn-info\" href=\"homework_report.html?hw_id="+ JData[i].id +"\">檢視</a></td>\
+              <td><a class=\"btn btn-info\" href=\"homework_edit.html?hwId="+ JData[i].id +"\">編輯</a></td>\
+            </tr>");
             i++;
           });
         },

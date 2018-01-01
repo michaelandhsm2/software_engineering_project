@@ -1,5 +1,6 @@
 ﻿courseId,courseName,professorAccount,assistantAccount,outline,semester,credits,hours
 220201,物件導向設計,teacher,assistant,Details: xxxx,105-2,3,3
-220203,作業系統,teacher2,assistant,Details: xxxx,106-1,1.5,3
-220205,CS 101,teacher2,ta,Details: xxxx,106-1,3,2
+221203,作業系統,teacher2,assistant,Details: xxxx,106-1,1.5,3
+221205,CS 101,teacher2,ta,Details: xxxx,106-1,3,2
 220207,Java應用,teacher,ta,Details: xxxx,105-2,1,3
+222207,Java實作課程,teacher,ta3,Details: xxxx,106-2,1,1
