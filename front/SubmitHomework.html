@@ -68,22 +68,7 @@
                     <td><a class="btn btn-info" href="homework_submit.html?hw_id=6">上傳作業</a></td>
                     <td>68</td>
                     </tr>
-                    <tr>
-                    <th scope="row">2</th>
-                    <td>HomeWork 2</td>
-                    <td>2017/11/16</td>
-                    <td class="text-success">已上傳</td>
-                    <td><a class="btn btn-info disabled" href="">上傳作業</a></td>
-                    <td>85</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">3</th>
-                    <td>HomeWork 3</td>
-                    <td>2017/12/8</td>
-                    <td class="text-danger">未上傳</td>
-                    <td><a class="btn btn-info" href="">上傳作業</a></td>
-                    <td></td>
-                    </tr>
+
                 </tbody>
                 </table>
             </div>
@@ -101,6 +86,7 @@
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/dateFormatter.js"></script>
 
     <script>
     //讀取session的user資料
@@ -113,7 +99,7 @@
         url: "http://127.0.0.1:8080/SE_final/api/class",
         data: {
           'member_id': user.id,
-          'list_type': 'student'
+          'role': 'student'
         },
         type:"POST",
         dataType:'json',
@@ -161,7 +147,15 @@
           $("#tbody_hw").empty();
           var i = 0;
           $.each(JData, function() {
-            $("#tbody_hw").append("<tr><th scope=\"row\">1</th><td>"+ JData[i].hw_name +"</td><td>"+ JData[i].deadline +"</td><td class=\"text-warning\">"+ JData[i].shw_status +"</td><td><a class=\"btn btn-info\" href=\"homework_submit.html?hw_id="+ JData[i].hw_id +"\">上傳作業</a></td><td>"+ JData[i].shw_fraction +"</td></tr>");
+            $("#tbody_hw").append("\
+            <tr>\
+              <th scope=\"row\">"+(i+1)+"</th>\
+              <td>"+ JData[i].hw_name +"</td>\
+              <td>"+ dateFormatter(JData[i].deadline) +"</td>\
+              <td class=\"text-warning\">"+ JData[i].shw_status +"</td>\
+              <td><a class=\"btn btn-info\" href=\"homework_submit.html?hw_id="+ JData[i].hw_id +"\">上傳作業</a></td>\
+              <td>"+ JData[i].shw_fraction +"</td>\
+            </tr>");
             i++;
           });
         },
