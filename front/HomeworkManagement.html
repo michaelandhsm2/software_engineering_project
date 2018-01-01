@@ -64,15 +64,6 @@
                     </tr>
                 </thead>
                 <tbody id="tbody_hw">
-                    <tr>
-                    <th scope="row">1</th>
-                    <td>Template</td>
-                    <td>2017/10/30</td>
-                    <td class="text-success">開放</td>
-                    <td><a class="btn btn-info" href="homework_audit.html?hw_id=1">審核</a></td>
-                    <td><a class="btn btn-info" href="homework_report.html?hw_id=1">檢視</a></td>
-                    <td><a class="btn btn-info" href="">編輯</a></td>
-                    </tr>
                 </tbody>
                 </table>
                 <a class="btn btn-success btn-block" id="newHw">新增作業</a>
@@ -91,12 +82,14 @@
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/dateFormatter.js"></script>
 
     <script>
     //讀取session的user資料
     var session_user = window.sessionStorage.getItem("user");
     user = JSON.parse(session_user);
     console.log(user);
+    $('#newHw').hide();
 
     // 取得課程清單
     $.ajax({
@@ -139,6 +132,8 @@
           location.href= ("homework_new.html?courseId="+course_id);
       });
 
+      $('#newHw').show();
+
       // 取得作業清單
       $.ajax({
         url: "http://127.0.0.1:8080/SE_final/api/hwClassAll",
@@ -150,12 +145,14 @@
 
         success: function(JData){
           console.log('成功');
+
+          JData.sort(function(a,b){return a.deadline - b.deadline});
           console.log(JData);
 
           $("#tbody_hw").empty();
           var i = 0;
           $.each(JData, function() {
-            $("#tbody_hw").append("<tr><th scope=\"row\">1</th><td>"+ JData[i].hw_name +"</td><td>"+ JData[i].deadline +"</td><td class=\"text-success\">"+ JData[i].late +"</td><td><a class=\"btn btn-info\" href=\"homework_audit.html?hw_id="+ JData[i].hw_id +"\">審核</a></td><td><a class=\"btn btn-info\" href=\"homework_report.html?hw_id="+ JData[i].hw_id +"\">檢視</a></td><td><a class=\"btn btn-info\" href=\"\">編輯</a></td></tr>");
+            $("#tbody_hw").append("<tr><th scope=\"row\">"+(i+1)+"</th><td>"+ JData[i].hw_name +"</td><td>"+ dateFormatter(JData[i].deadline) +"</td><td class=\"text-success\">"+ JData[i].late +"</td><td><a class=\"btn btn-info\" href=\"homework_audit.html?hw_id="+ JData[i].hw_id +"\">審核</a></td><td><a class=\"btn btn-info\" href=\"homework_report.html?hw_id="+ JData[i].hw_id +"\">檢視</a></td><td><a class=\"btn btn-info\" href=\"\">編輯</a></td></tr>");
             i++;
           });
         },

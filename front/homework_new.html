@@ -65,10 +65,10 @@
                     <div class="form-group row">
                         <label for="" class="col-sm-2 col-form-label">繳交期限</label>
                         <div class="col-sm-10">
-                            <input type="date" class="form-control" name="deadline">
+                            <input type="date" class="form-control" id="form-deadline">
                         </div>
                     </div>
-                    <fieldset class="form-group">
+                    <div class="form-group">
                       <div class="row">
                         <legend class="col-form-legend col-sm-2">開放遲交</legend>
                         <div class="col-sm-10">
@@ -84,11 +84,12 @@
                           </div>
                         </div>
                       </div>
-                    </fieldset>
+                    </div>
+                      <input type="hidden" name="courseId" id="courseId">
+                      <input type="hidden" name="deadline" id="deadline">
                     <div class="div_foot">
                         <button type="button" id="btn_submit" class="btn btn-primary">確認新增</button>
                     </div>
-                      <input type="hidden" name="courseId" id="courseId">
                     </form>
                 </div>
             </div>
@@ -113,7 +114,8 @@
 
       $("#btn_submit").click(function() {
         console.log('btn_submit pressed');
-        console.log(new FormData($('#form')[0]));
+        $('#deadline').val($('#form-deadline').val());
+        console.log($('#form-deadline').val());
         $.ajax({
           url: 'http://127.0.0.1:8080/SE_final/api/createHw',
           type: 'POST',
@@ -124,7 +126,7 @@
 
           success: function(e){
               console.log('成功');
-
+              location.href= ("HomeworkManagement.html");
           },
 
           error: function(xhr, ajaxOptions, thrownError){

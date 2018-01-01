@@ -89,7 +89,7 @@
               </div>
             </div>
             <div class="div_foot">
-              <button type="submit" id="btn_submit" class="btn btn-primary">確認新增</button>
+              <button type="button" id="btn_submit" class="btn btn-primary">確認新增</button>
             </div>
           </form>
         </div>
@@ -111,14 +111,28 @@
   <script type="text/javascript">
     $("#btn_submit").click(function() {
       console.log('btn_submit pressed');
+      var data = new FormData($('#form')[0]);
+      console.log(data);
       $.ajax({
         url: 'http://127.0.0.1:8080/SE_final/api/createUser',
         type: 'POST',
         cache: false,
         data: new FormData($('#form')[0]),
         processData: false,
-        contentType: false
-      }).done(function(res) {}).fail(function(res) {});
+        contentType: false,
+
+        success: function(e){
+            console.log('成功');
+            location.href= ("index.html");
+        },
+
+        error: function(xhr, ajaxOptions, thrownError){
+          console.log('失敗');
+          console.log(xhr.responseText);
+          console.log(xhr.status);
+          console.log(thrownError);
+        }
+      });
     });
   </script>
 

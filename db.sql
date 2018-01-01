@@ -110,7 +110,7 @@ CREATE TABLE `user` (
   `ROLE` varchar(255) DEFAULT NULL,
   `USERNAME` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'103820004','50201of5537','student','Michael'),(2,'11111111','11111111','student','Esther Han'),(3,'ta','password','ta','Sophia Yi'),(4,'admin','password','admin','test'),(5,'teacher','password','teacher','老師1'),(6,'s','s','student','s');
+INSERT INTO `user` VALUES (1,'103820004','50201of5537','student','Michael'),(2,'11111111','11111111','student','Esther Han'),(3,'ta','password','ta','Sophia Yi'),(4,'admin','password','admin','test'),(5,'teacher','password','teacher','老師1'),(6,'s','s','student','s'),(7,'wef','wef','student','wef'),(8,'we','wef','student','wef'),(9,'wef','wef','student','wfe');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -187,4 +187,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-30 11:11:17
+-- Dump completed on 2017-12-30 20:26:13
