@@ -51,16 +51,16 @@
                     <tr>
                     <th scope="col">學生姓名</th>
                     <th scope="col">學號</th>
-                    <th scope="col">班級</th>
-                    <th scope="col">E-Mail</th>
+                    <th scope="col">課程</th>
+                    <th scope="col">授課老師</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                    <td id="td_name">學生 1</td>
-                    <td id="td_account">106598001</td>
-                    <td id="td_class">資工碩一</td>
-                    <td id="td_email">t106598001@ntut.edu.tw</td>
+                    <td id="td_name"></td>
+                    <td id="td_account"></td>
+                    <td id="td_class"></td>
+                    <td id="td_email"></td>
                     </tr>
                 </tbody>
             </table>
@@ -109,30 +109,15 @@
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/params.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
 
     <script>
-    //讀取session的user資料
-    var session_user = window.sessionStorage.getItem("user");
-    user = JSON.parse(session_user);
-    console.log(user);
+    console.log(urlParams.course_id[0]);
+    var course_id = urlParams.course_id[0];
 
-
-    // 取得get
-    var member_id = getParameter("member_id");
-    console.log(member_id);
-    var course_id = getParameter("course_id");
-    console.log(course_id);
-
-    function getParameter(name, url) {
-        if (!url) url = window.location.href;
-        name = name.replace(/[\[\]]/g, "\\$&");
-        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, " "));
-    }
-
+    console.log(urlParams.user_id[0]);
+    var user_id = urlParams.user_id[0];
 
 
     // 圖表資料
@@ -141,22 +126,33 @@
     var hw_name = new Array();
     var sum = 0;
     var count = 0;
-    var average = 0;
+    var average = 0
+    $.ajax({
+        url: "http://127.0.0.1:8080/SE_final/api/getSingleUser",
+        data: {
+          'user_id': user_id
+        },
+        type:"POST",
+        dataType:'json',
 
-    // 測試
-    var self = new Array(73,82,60);
-    var class_average = new Array(81,56,76);
-    var hw_name = new Array('作業1','作業2','作業3');
-    var sum = 215;
-    var count = 3;
-    var average = sum/count;
+        success: function(JData){
+          console.log('成功');
+          console.log(JData);
+          $('#td_name').html(JData.member_name);
+          $('#td_account').html(JData.member_account);
+        },
 
-
+        error: function(xhr, ajaxOptions, thrownError){
+          console.log('失敗');
+          console.log(xhr.responseText);
+          console.log(xhr.status);
+          console.log(thrownError);
+        }
+    });
 
     $.ajax({
-        url: "http://140.124.183.30:8080/SE_pj/api/hwClassAll",
+        url: "http://127.0.0.1:8080/SE_final/api/singleClass",
         data: {
-          'member_id': member_id,
           'course_id': course_id
         },
         type:"POST",
@@ -165,35 +161,107 @@
         success: function(JData){
           console.log('成功');
           console.log(JData);
+          $('#td_class').html(JData.course_id +" "+JData.course_name);
+          $('#td_email').html(JData.professor);
+        },
 
-          $('#td_name').text(JData.member_name);
-          $('#td_account').text(JData.member_account);
-          $('#td_class').text(JData.member_class);
-          $('#td_email').text(JData.member_email);
+        error: function(xhr, ajaxOptions, thrownError){
+          console.log('失敗');
+          console.log(xhr.responseText);
+          console.log(xhr.status);
+          console.log(thrownError);
+        }
+    });
 
-          
+
+    $.ajax({
+        url: "http://127.0.0.1:8080/SE_final/api/hwAllDetail2",
+        data: {
+          'user_id': user_id,
+          'course_id': course_id
+        },
+        type:"POST",
+        dataType:'json',
+
+        success: function(JData){
+          console.log('成功');
+          console.log(JData[0]);
+
           $("#tbody_hw").empty();
           var i = 0;
-          $.each(JData.hw_list, function() {
+          $.each(JData, function() {
 
-            self[i] = JData.hw_list[i].shw_fraction;
-            hw_name[i] = JData.hw_list[i].hw_name;
+            self[i] = JData[i].shw_fraction;
+            hw_name[i] = JData[i].hw_name;
 
-            sum += JData.hw_list[i].shw_fraction;
+            sum += JData[i].shw_fraction;
             count++;
 
-            $("#tbody_hw").append("<tr><th scope=\"row\">1</th><td>"+ JData.hw_list[i].hw_name +"</td><td class=\"text-warning\">"+ JData.hw_list[i].shw_status +"</td><td>"+ JData.hw_list[i].shw_fraction +"</td></tr>");
+            var status;
+            switch(JData[i].shw_status){
+              case "已繳交":
+                status="text-success";
+                break;
+              case "未繳交":
+                status="text-danger";
+                break;
+              default:
+                status="text-warning";
+            }
+
+            $("#tbody_hw").append("\
+            <tr>\
+              <th scope=\"row\">"+(i+1)+"</th>\
+              <td><a href=\"homework_report.html?hw_id="+ JData[i].hw_id +"\">"+ JData[i].hw_name +"</a></td>\
+              <td class='"+status+"'>"+ JData[i].shw_status +"</td>\
+              <td>"+ JData[i].shw_fraction +"</td>\
+            </tr>");
             i++;
           });
 
           average = sum/count;
 
 
-          // 班級平均
-          var i = 0;
-          $.each(JData.hw_list, function() {
-            class_average[i] = JData.class_fraction[i];
-            i++;
+          // // 班級平均
+          // var i = 0;
+          // $.each(JData.hw_list, function() {
+          //   class_average[i] = JData.class_fraction[i];
+          //   i++;
+          // });
+
+          $('#container').highcharts({
+              chart: {
+                  type: 'line'
+              },
+              title: {
+                  text: '作業分數'
+              },
+              subtitle: {
+                  text: '平均成績 : '+ average.toFixed(2) +' 分'
+                  // text: '平均成績 : 63.8 分'
+              },
+              xAxis: {
+                  categories: hw_name
+                  // categories: ['HomeWork 1', 'HomeWork 2', 'HomeWork 3', 'HomeWork 4', 'HomeWork 5']
+              },
+              yAxis: {
+                  title: {
+                      text: '分數'
+                  }
+              },
+              plotOptions: {
+                  line: {
+                      dataLabels: {
+                          enabled: true          // 开启数据标签
+                      },
+                      enableMouseTracking: false // 关闭鼠标跟踪，对应的提示框、点击事件会失效
+                  }
+              },
+              series: [{
+                  name: '個人成績',
+                  data: self
+                  // data: [68.0, 85.0, 76.0]
+              }]
           });
         },
 
@@ -208,50 +276,5 @@
 
 
 
-
-    <!-- Highcharts -->
-    <script src="http://code.highcharts.com/highcharts.js"></script>
-    <script>
-    $(function () {
-        $('#container').highcharts({
-            chart: {
-                type: 'line'
-            },
-            title: {
-                text: '作業分數'
-            },
-            subtitle: {
-                text: '平均成績 : '+ average.toFixed(2) +' 分'
-                // text: '平均成績 : 63.8 分'
-            },
-            xAxis: {
-                categories: hw_name
-                // categories: ['HomeWork 1', 'HomeWork 2', 'HomeWork 3', 'HomeWork 4', 'HomeWork 5']
-            },
-            yAxis: {
-                title: {
-                    text: '分數'
-                }
-            },
-            plotOptions: {
-                line: {
-                    dataLabels: {
-                        enabled: true          // 开启数据标签
-                    },
-                    enableMouseTracking: false // 关闭鼠标跟踪，对应的提示框、点击事件会失效
-                }
-            },
-            series: [{
-                name: '個人成績',
-                data: self
-                // data: [68.0, 85.0, 76.0]
-            }, {
-                name: '班級平均',
-                data: class_average
-                // data: [83.9, 78.5, 81.9]
-            }]
-        });
-    });
-    </script>
   </body>
 </html>

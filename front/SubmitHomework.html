@@ -155,7 +155,10 @@
               <td>"+ JData[i].hw_name +"</td>\
               <td>"+ dateFormatter(JData[i].deadline) +"</td>\
               <td class='"+status+"'>"+ JData[i].shw_status +"</td>\
-              <td><a class=\"btn btn-info\" href=\"homework_submit.html?hw_id="+ JData[i].hw_id +"\">上傳作業</a></td>\
+              <td>\
+                <a class=\"btn btn-info\" href=\"homework_submit.html?hw_id="+ JData[i].hw_id +"\">上傳作業</a>"+
+                (JData[i].shw_status!="未繳交"? "  <a class=\"btn btn-info\" href='http://127.0.0.1:8080/SE_final/api/download/"+JData[i].file_id+"'>下載作業</a>":"")+
+              "</td>\
               <td>"+ JData[i].shw_fraction +"</td>\
             </tr>");
             i++;

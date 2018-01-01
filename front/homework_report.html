@@ -102,24 +102,14 @@
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/params.js"></script>
+
+        <!-- Highcharts -->
+        <script src="http://code.highcharts.com/highcharts.js"></script>
 
     <script>
-    // 取得get
-    var hw_id = getParameter("hw_id");
-    console.log(hw_id);
-
-    function getParameter(name, url) {
-        if (!url) url = window.location.href;
-        name = name.replace(/[\[\]]/g, "\\$&");
-        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, " "));
-    }
-
-
-
+    console.log(urlParams.hw_id[0]);
+    var hw_id = urlParams.hw_id[0];
 
     // 圖表資料
     var people = new Array(0,0,0,0,0,0,0,0,0,0);
@@ -176,7 +166,7 @@
 
     // 顯示作業資訊
     $.ajax({
-        url: "http://127.0.0.1:8080/SE_final/api/login",
+        url: "http://127.0.0.1:8080/SE_final/api/hwAllDetail",
         data: {
             'hw_id': hw_id
         },
@@ -190,15 +180,72 @@
             $("#tbody_shw").empty();
             var i = 0;
             $.each(JData, function() {
-              
-              calculate(JData.shw_fraction);
 
-              $("#tbody_shw").append("<tr><th scope=\"row\">1</th><td><a href=\"homework_personal?member_id="+ JData.member_id +"&course_id="+ hw_id +".html\">"+ JData.member_name +"</a></td><td class=\"text-warning\">"+ JData.shw_status +"</td><td>"+ JData.shw_fraction +"</td></tr>");
+              calculate(JData[i].shw_fraction);
+
+              $("#tbody_shw").append("\
+              <tr>\
+                <th scope=\"row\">"+(i+1)+"</th>\
+                <td><a href=\"homework_personal.html?user_id="+ JData[i].user_id +"&course_id="+ JData[i].course_id +"\">"+ JData[i].studentName +"</a></td>\
+                <td class=\"text-warning\">"+ JData[i].shw_status +"</td>\
+                <td>"+ JData[i].shw_fraction +"</td>\
+              </tr>");
               i++;
             });
 
             average = sum/count;
             $('#sp_average').text(average.toFixed(2));
+            $('#container').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: '分數分布'
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    categories: [
+                        '0~10',
+                        '11~20',
+                        '21~30',
+                        '31~40',
+                        '41~50',
+                        '51~60',
+                        '61~70',
+                        '71~80',
+                        '81~90',
+                        '91~100'
+                    ],
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '人數'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} 人</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: '人數',
+                    data: people
+                    // data: [1, 0, 2, 1, 2, 3, 4, 6, 3, 2]
+                }]
+            });
         },
 
         error: function(xhr, ajaxOptions, thrownError){
@@ -210,73 +257,10 @@
     });
 
 
-
-
-
-
-
-
     </script>
 
 
 
 
-    <!-- Highcharts -->
-    <script src="http://code.highcharts.com/highcharts.js"></script>
-    <script>
-    $(function () {
-        $('#container').highcharts({
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: '分數分布'
-            },
-            subtitle: {
-                text: ''
-            },
-            xAxis: {
-                categories: [
-                    '0~10',
-                    '11~20',
-                    '21~30',
-                    '31~40',
-                    '41~50',
-                    '51~60',
-                    '61~70',
-                    '71~80',
-                    '81~90',
-                    '91~100'
-                ],
-                crosshair: true
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: '人數'
-                }
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} 人</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
-            series: [{
-                name: '人數',
-                data: people
-                // data: [1, 0, 2, 1, 2, 3, 4, 6, 3, 2]
-            }]
-        });
-    });
-    </script>
   </body>
 </html>
