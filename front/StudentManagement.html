@@ -9,6 +9,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main_style.css">
+    <style>
+      .div_body{
+          max-width: 800px;
+          margin: 0 auto;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -40,8 +46,9 @@
     </header>
     <div class="container-fluid">
       <div class="div_body">
+        <br>
         <div class="row">
-            <div class="col-2">
+            <div class="col-4">
                 <div class="card">
                     <div class="card-header">
                         課程
@@ -53,62 +60,29 @@
                     </div>
                 </div>
             </div>
-            <div class="col-10">
+            <div class="col-8">
                 <table class="table table-hover table-bordered">
                 <thead>
                     <tr>
                     <th scope="col">#</th>
+                    <th scope="col">帳號</th>
                     <th scope="col">學生姓名</th>
-                    <th scope="col">學號</th>
-                    <th scope="col">班級</th>
-                    <th scope="col">E-Mail</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                    <th scope="row">1</th>
-                    <td>學生 1</td>
-                    <td>106598001</td>
-                    <td>資工碩一</td>
-                    <td>t106598001@ntut.edu.tw</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">2</th>
-                    <td>學生 2</td>
-                    <td>106598002</td>
-                    <td>資工碩一</td>
-                    <td>t106598002@ntut.edu.tw</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">3</th>
-                    <td>學生 3</td>
-                    <td>106598003</td>
-                    <td>資工碩一</td>
-                    <td>t106598003@ntut.edu.tw</td>
-                    </tr>
-                    <th scope="row">4</th>
-                    <td>學生 4</td>
-                    <td>106598004</td>
-                    <td>資工二</td>
-                    <td>t106598004@ntut.edu.tw</td>
-                    </tr>
-                    <th scope="row">5</th>
-                    <td>學生 5</td>
-                    <td>106598005</td>
-                    <td>資工三</td>
-                    <td>t106598005@ntut.edu.tw</td>
-                    </tr>
+                <tbody class="tr-group">
                 </tbody>
                 </table>
-                <div class="row">
-                  <div class="col">
-                    <button type="button" class="btn btn-success btn-block">匯入修課資訊</button>
-                  </div>
-                  <div class="col">
-                    <button type="button" class="btn btn-danger btn-block">清除修課資訊</button>
-                  </div>
-                </div>
             </div>
+        </div>
+          <br>
+        <div class="row">
+          <div class="col">
+            <button id="importAccount" type="button" class="btn btn-success btn-block">匯入修課資訊</button>
+            <input id="accountFile" type="file" style="display: none;" />
+          </div>
+          <div class="col">
+            <button id="deleteAccount" type="button" class="btn btn-danger btn-block">清除修課資訊</button>
+          </div>
         </div>
       </div>
     </div>
@@ -119,5 +93,149 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/papaparse.js"></script>
+
+    <script type="text/javascript">
+    $.ajax({
+        url: "http://127.0.0.1:8080/SE_final/api/class",
+        data: {
+          'member_id': 1,
+          'list_type': 'admin'
+        },
+        type:"POST",
+        dataType:'json',
+
+        success: function(JData){
+          console.log('成功');
+          console.log(JData);
+
+          $(".list-group").empty();
+          var i = 0;
+          $.each(JData, function() {
+            $(".list-group").append("<button class=\"list-group-item list-group-item-action\" onclick=\"clickCourse(this,"+ JData[i].course_id +")\">"+ JData[i].course_name +"</button>");
+            i++;
+          });
+        },
+
+        error: function(xhr, ajaxOptions, thrownError){
+          console.log('失敗');
+          console.log(xhr.responseText);
+          console.log(xhr.status);
+          console.log(thrownError);
+        }
+    });
+
+    function clickCourse(obj,course_id){
+      $('.list-group-item').removeClass('active');
+      $(obj).addClass('active');
+      console.log(course_id);
+
+      $.ajax({
+        url: "http://127.0.0.1:8080/SE_final/api/getStudents",
+        data: {
+          'courseId': course_id
+        },
+        type:"POST",
+        dataType:'json',
+
+        success: function(JData){
+          console.log('成功');
+
+          JData.sort(function(a,b){return a.member_account.localeCompare(b.member_account)});
+          console.log(JData);
+
+          $(".tr-group").empty();
+          var i = 0;
+          $.each(JData, function() {
+            $(".tr-group").append("\
+                <tr>\
+                  <th scope='row'>"+(i+1)+"</th>\
+                  <td>"+JData[i].member_account+"</td>\
+                  <td>"+JData[i].member_name+"</td>\
+                </tr>");
+            i++;
+          });
+        },
+
+        error: function(xhr, ajaxOptions, thrownError){
+          console.log('失敗');
+          console.log(xhr.responseText);
+          console.log(xhr.status);
+          console.log(thrownError);
+        }
+      });
+    }
+
+
+    $('#importAccount').on('click', function() {
+        $('#accountFile').trigger('click');
+      });
+
+    $('#accountFile').change(function(evt) {
+        var file = evt.target.files[0];
+        Papa.parse(file, {
+          header: true,
+          delimiter: ",",
+          skipEmptyLines: true,
+          complete: function(results) {
+            var data = results.data;
+            for (key in data) {
+              var form_data = new FormData();
+              for ( var key2 in data[key] ) {
+                  form_data.append(key2, data[key][key2]);
+              }
+
+              $.ajax({
+                url: 'http://127.0.0.1:8080/SE_final/api/createUserCourse',
+                type: 'POST',
+                cache: false,
+                data: form_data,
+                processData: false,
+                contentType: false,
+
+                success: function(e){
+                    console.log('成功');
+                    window.location.reload(false);
+                },
+
+                error: function(xhr, ajaxOptions, thrownError){
+                  console.log('失敗');
+                  console.log(xhr.responseText);
+                  console.log(xhr.status);
+                  console.log(thrownError);
+                }
+              });
+            }
+          }
+        });
+        $("#accountFile").val("");
+      });
+
+      $('#deleteAccount').on('click', function() {
+        $.ajax({
+          url: 'http://127.0.0.1:8080/SE_final/api/deleteUserCourse',
+          type: 'POST',
+          cache: false,
+          data: {
+              'user_id': 1
+          },
+          processData: false,
+          contentType: false,
+
+          success: function(e){
+              console.log('成功');
+              window.location.reload(true);
+          },
+
+          error: function(xhr, ajaxOptions, thrownError){
+            console.log('失敗');
+            console.log(xhr.responseText);
+            console.log(xhr.status);
+            console.log(thrownError);
+          }
+        });
+      });
+    </script>
   </body>
 </html>
