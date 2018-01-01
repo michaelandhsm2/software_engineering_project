@@ -78,6 +78,7 @@
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="js/dateFormatter.js"></script>
+    <script src="js/server.js"></script>
 
     <script>
     //讀取session的user資料
@@ -87,7 +88,7 @@
 
     // 取得課程清單
     $.ajax({
-        url: "http://127.0.0.1:8080/SE_final/api/class",
+        url: SERVER_API + "/class",
         data: {
           'member_id': user.id,
           'role': 'student'
@@ -123,7 +124,7 @@
 
       // 取得作業清單
       $.ajax({
-        url: "http://127.0.0.1:8080/SE_final/api/hwDetail",
+        url: SERVER_API + "/hwDetail",
         data: {
           'member_id': user.id,
           'course_id': course_id
@@ -157,7 +158,7 @@
               <td class='"+status+"'>"+ JData[i].shw_status +"</td>\
               <td>\
                 <a class=\"btn btn-info\" href=\"homework_submit.html?hw_id="+ JData[i].hw_id +"\">上傳作業</a>"+
-                (JData[i].shw_status!="未繳交"? "  <a class=\"btn btn-info\" href='http://127.0.0.1:8080/SE_final/api/download/"+JData[i].file_id+"'>下載作業</a>":"")+
+                (JData[i].shw_status!="未繳交"? "  <a class=\"btn btn-info\" href="+SERVER_API+"/download/"+JData[i].file_id+"'>下載作業</a>":"")+
               "</td>\
               <td>"+ JData[i].shw_fraction +"</td>\
             </tr>");

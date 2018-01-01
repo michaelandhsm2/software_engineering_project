@@ -111,6 +111,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="js/params.js"></script>
     <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="js/server.js"></script>
 
     <script>
     console.log(urlParams.course_id[0]);
@@ -128,7 +129,7 @@
     var count = 0;
     var average = 0
     $.ajax({
-        url: "http://127.0.0.1:8080/SE_final/api/getSingleUser",
+        url: SERVER_API + "/getSingleUser",
         data: {
           'user_id': user_id
         },
@@ -151,7 +152,7 @@
     });
 
     $.ajax({
-        url: "http://127.0.0.1:8080/SE_final/api/singleClass",
+        url: SERVER_API + "/singleClass",
         data: {
           'course_id': course_id
         },
@@ -175,7 +176,7 @@
 
 
     $.ajax({
-        url: "http://127.0.0.1:8080/SE_final/api/hwAllDetail2",
+        url: SERVER_API + "/hwAllDetail2",
         data: {
           'user_id': user_id,
           'course_id': course_id

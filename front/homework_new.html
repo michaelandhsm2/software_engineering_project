@@ -106,6 +106,7 @@
           <!-- jQuery -->
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
           <script src="js/params.js"></script>
+          <script src="js/server.js"></script>
 
     <script type="text/javascript">
 
@@ -117,7 +118,7 @@
         $('#deadline').val($('#form-deadline').val());
         console.log($('#form-deadline').val());
         $.ajax({
-          url: 'http://127.0.0.1:8080/SE_final/api/createHw',
+          url: SERVER_API + '/createHw',
           type: 'POST',
           cache: false,
           data: new FormData($('#form')[0]),

@@ -81,6 +81,7 @@
             <!-- jQuery -->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
             <script src="js/papaparse.js"></script>
+            <script src="js/server.js"></script>
 
     <script type="text/javascript">
     $('#importAccount').on('click', function() {
@@ -102,7 +103,7 @@
               }
 
               $.ajax({
-                url: 'http://127.0.0.1:8080/SE_final/api/createUser',
+                url: SERVER_API + '/createUser',
                 type: 'POST',
                 cache: false,
                 data: form_data,
@@ -129,7 +130,7 @@
 
       $('#deleteAccount').on('click', function() {
         $.ajax({
-          url: 'http://127.0.0.1:8080/SE_final/api/deleteUser',
+          url: SERVER_API + '/deleteUser',
           type: 'POST',
           cache: false,
           data: {
@@ -154,7 +155,7 @@
 
 
     $.ajax({
-        url: "http://127.0.0.1:8080/SE_final/api/getUser",
+        url: SERVER_API + "/getUser",
         data: {
             'user_id': 1
         },

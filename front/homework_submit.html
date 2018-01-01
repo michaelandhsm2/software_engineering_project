@@ -105,6 +105,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="js/params.js"></script>
     <script src="js/dateFormatter.js"></script>
+    <script src="js/server.js"></script>
 
 
     <script>
@@ -122,7 +123,7 @@
 
     // 顯示作業資訊
     $.ajax({
-        url: 'http://127.0.0.1:8080/SE_final/api/unitHwContent',
+        url: SERVER_API + '/unitHwContent',
         data: {
             'hwId': hw_id
         },
@@ -151,7 +152,7 @@
       console.log('btn_submit pressed');
       console.log(new FormData($('#uploadForm')[0]));
         $.ajax({
-            url: 'http://127.0.0.1:8080/SE_final/api/upload',
+            url: SERVER_API + '/upload',
             type: 'POST',
             cache: false,
             data: new FormData($('#uploadForm')[0]),

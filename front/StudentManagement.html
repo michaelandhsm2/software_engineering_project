@@ -95,10 +95,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="js/papaparse.js"></script>
+    <script src="js/server.js"></script>
 
     <script type="text/javascript">
     $.ajax({
-        url: "http://127.0.0.1:8080/SE_final/api/class",
+        url: SERVER_API + "/class",
         data: {
           'member_id': 1,
           'role': 'admin'
@@ -132,7 +133,7 @@
       console.log(course_id);
 
       $.ajax({
-        url: "http://127.0.0.1:8080/SE_final/api/getStudents",
+        url: SERVER_API + "/getStudents",
         data: {
           'courseId': course_id
         },
@@ -187,7 +188,7 @@
               }
 
               $.ajax({
-                url: 'http://127.0.0.1:8080/SE_final/api/createUserCourse',
+                url: SERVER_API + '/createUserCourse',
                 type: 'POST',
                 cache: false,
                 data: form_data,
@@ -214,7 +215,7 @@
 
       $('#deleteAccount').on('click', function() {
         $.ajax({
-          url: 'http://127.0.0.1:8080/SE_final/api/deleteUserCourse',
+          url: SERVER_API + '/deleteUserCourse',
           type: 'POST',
           cache: false,
           data: {

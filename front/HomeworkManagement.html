@@ -83,6 +83,7 @@
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="js/dateFormatter.js"></script>
+    <script src="js/server.js"></script>
 
     <script>
     //讀取session的user資料
@@ -93,7 +94,7 @@
 
     // 取得課程清單
     $.ajax({
-        url: "http://127.0.0.1:8080/SE_final/api/class",
+        url: SERVER_API + "/class",
         data: {
           'member_id': user.id,
           'role': user.role
@@ -136,7 +137,7 @@
 
       // 取得作業清單
       $.ajax({
-        url: "http://127.0.0.1:8080/SE_final/api/hwClassAll",
+        url: SERVER_API + "/hwClassAll",
         data: {
           'course_id': course_id
         },

@@ -76,6 +76,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="js/params.js"></script>
     <script src="js/dateFormatter.js"></script>
+    <script src="js/server.js"></script>
 
     <script>
 
@@ -83,7 +84,7 @@
     console.log(urlParams.hw_id[0]);
     var hw_id = urlParams.hw_id[0];
     $.ajax({
-        url: "http://127.0.0.1:8080/SE_final/api/unitHwContent",
+        url: SERVER_API + "/unitHwContent",
         data: {
             'hwId': hw_id
         },
@@ -106,7 +107,7 @@
 
     // 顯示作業資訊
     $.ajax({
-        url: "http://127.0.0.1:8080/SE_final/api/hwAllDetail",
+        url: SERVER_API + "/hwAllDetail",
         data: {
             'hw_id': hw_id
         },
@@ -143,7 +144,7 @@
                         <td class='text-success'>"+JData[i].shw_status+"</td>\
                         <td>"+JData[i].shw_fraction+"</td>\
                         <td>"+JData[i].shw_comment+"</td>\
-                        <td><a class='btn btn-info' href='http://127.0.0.1:8080/SE_final/api/download/"+JData[i].file_id+"'>下載</a></td>\
+                        <td><a class='btn btn-info' href='"+ SERVER_API + "/download/"+JData[i].file_id+"'>下載</a></td>\
                         <td><a class='btn btn-info' href='homework_scoring.html?hw_id="+hw_id+"&user_id="+JData[i].user_id+"'>編輯</a></td>\
                     </tr>");
               }

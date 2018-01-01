@@ -82,6 +82,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="js/papaparse.js"></script>
+    <script src="js/server.js"></script>
 
     <script type="text/javascript">
 
@@ -104,7 +105,7 @@
               }
 
               $.ajax({
-                url: 'http://127.0.0.1:8080/SE_final/api/createClass',
+                url: SERVER_API + '/createClass',
                 type: 'POST',
                 cache: false,
                 data: form_data,
@@ -131,7 +132,7 @@
 
       $('#deleteCourse').on('click', function() {
         $.ajax({
-          url: 'http://127.0.0.1:8080/SE_final/api/deleteCourse',
+          url: SERVER_API + '/deleteCourse',
           type: 'POST',
           cache: false,
           data: {
@@ -156,7 +157,7 @@
 
 
     $.ajax({
-        url: "http://127.0.0.1:8080/SE_final/api/getAllClass",
+        url: SERVER_API + "/getAllClass",
         data: {
             'user_id': 1
         },

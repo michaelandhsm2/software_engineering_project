@@ -107,6 +107,7 @@
 
       <!-- jQuery -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script src="js/server.js"></script>
 
   <script type="text/javascript">
     $("#btn_submit").click(function() {
@@ -114,7 +115,7 @@
       var data = new FormData($('#form')[0]);
       console.log(data);
       $.ajax({
-        url: 'http://127.0.0.1:8080/SE_final/api/createUser',
+        url: SERVER_API + '/createUser',
         type: 'POST',
         cache: false,
         data: new FormData($('#form')[0]),
