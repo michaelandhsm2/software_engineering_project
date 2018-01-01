@@ -103,25 +103,18 @@
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/params.js"></script>
 
     <script>
     // 取得get
-    var hw_id = getParameter("hw_id");
-    console.log(hw_id);
+    console.log(urlParams.hw_id[0]);
+    var hw_id = urlParams.hw_id[0];
     $('#hw_id').val(hw_id);
 
-    // TODO: Make member_id dynamic!!!!!!!!!!!
-    $('#member_id').val(1);
-
-    function getParameter(name, url) {
-        if (!url) url = window.location.href;
-        name = name.replace(/[\[\]]/g, "\\$&");
-        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, " "));
-    }
+    var session_user = window.sessionStorage.getItem("user");
+    user = JSON.parse(session_user);
+    console.log(user);
+    $('#member_id').val(user.id);
 
 
 
@@ -129,7 +122,7 @@
     $.ajax({
         url: 'http://127.0.0.1:8080/SE_final/api/unitHwContent',
         data: {
-            'hw_id': hw_id
+            'hwId': hw_id
         },
         type:"POST",
         dataType:'json',
@@ -165,7 +158,7 @@
 
             success: function(e){
                 console.log('成功');
-
+                location.href= ("SubmitHomework.html");
             },
 
             error: function(xhr, ajaxOptions, thrownError){

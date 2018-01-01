@@ -44,8 +44,8 @@
     </header>
     <div class="container-fluid">
       <div class="div_body">
-        <!-- <h3>作業 1</h3> -->
-        <form action="">
+        <h3 id="hwName"></h3>
+        <form id="uploadForm">
         <table class="table table-bordered">
             <tbody>
                 <tr>
@@ -53,21 +53,19 @@
                     <td><a href="http://127.0.0.1:8080/SE_final/api/download/1" id="a_file">檔案下載</a></td>
                 </tr>
                 <tr>
-                    <th scope="row">補充說明</th>
-                    <td id="td_description">無</td>
-                </tr>
-                <tr>
                     <th scope="row">分數</th>
-                    <td><input type="number" class="form-control" id="inp_fraction" value="68"></td>
+                    <td><input type="number" class="form-control" name="shw_fraction" id="inp_fraction" ></td>
                 </tr>
                 <tr>
                     <th scope="row">評語</th>
-                    <td><input type="text" class="form-control" id="inp_comment" value="遲交分數折扣"></td>
+                    <td><input type="text" class="form-control" name="comments" id="inp_comment"></td>
                 </tr>
             </tbody>
         </table>
+          <input type="hidden" name="hw_id" id="hw_id">
+          <input type="hidden" name="member_id" id="member_id">
         <div class="div_foot">
-          <button type="button" class="btn btn-primary">確認更新</button>
+          <button type="button" id="updateBtn" class="btn btn-primary">確認更新</button>
         </div>
         </form>
       </div>
@@ -83,29 +81,20 @@
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/params.js"></script>
 
     <script>
-    // 取得get
-    var shw_id = getParameter("shw_id");
-    console.log(shw_id);
+    console.log(urlParams.hw_id[0]);
+    var hw_id = urlParams.hw_id[0];
+    $('#hw_id').val(hw_id);
+    console.log(urlParams.user_id[0]);
+    var user_id = urlParams.user_id[0];
+    $('#member_id').val(user_id);
 
-    function getParameter(name, url) {
-        if (!url) url = window.location.href;
-        name = name.replace(/[\[\]]/g, "\\$&");
-        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, " "));
-    }
-
-
-
-    // 顯示
     $.ajax({
-        url: "http://140.124.183.30:8080/SE_pj/api/login",
+        url: "http://127.0.0.1:8080/SE_final/api/unitHwContent",
         data: {
-            'shw_id': shw_id
+            'hwId': hw_id
         },
         type:"POST",
         dataType:'json',
@@ -113,10 +102,7 @@
         success: function(JData){
             console.log('成功');
             console.log(JData);
-            $('#a_file').attr("href","http://127.0.0.1:8080/SE_final/api/download/" + JData.shw_file);
-            $('#td_description').text(JData.shw_description);
-            $('#inp_fraction').val(JData.shw_fraction);
-            $('#inp_comment').val(JData.shw_comment);
+            $('#hwName').append(" "+JData.hw_name+" ");
         },
 
         error: function(xhr, ajaxOptions, thrownError){
@@ -127,21 +113,23 @@
         }
     });
 
-
-    // 更新
+    // 顯示
     $.ajax({
-        url: "http://140.124.183.30:8080/SE_pj/api/login",
+        url: "http://127.0.0.1:8080/SE_final/api/hwOneDetail",
         data: {
-            'shw_id': shw_id,
-            'shw_fraction': $('#inp_fraction').val(),
-            'shw_comment': $('#inp_comment').val()
+            'hw_id': hw_id,
+            'user_id': user_id
         },
         type:"POST",
         dataType:'json',
 
         success: function(JData){
             console.log('成功');
-            location.href= ("homework_audit.html");
+            console.log(JData);
+            $('#a_file').attr("href","http://127.0.0.1:8080/SE_final/api/download/" + JData.file_id);
+            $('#inp_fraction').val(JData.shw_fraction);
+            $('#inp_comment').val(JData.shw_comment);
+            $('#hwName').append(" "+JData.studentName+" ");
         },
 
         error: function(xhr, ajaxOptions, thrownError){
@@ -150,6 +138,30 @@
             console.log(xhr.status);
             console.log(thrownError);
         }
+    });
+
+    $("#updateBtn").click(function(){
+      console.log('updateBtn pressed');
+        $.ajax({
+            url: 'http://127.0.0.1:8080/SE_final/api/updateScore',
+            type: 'POST',
+            cache: false,
+            data: new FormData($('#uploadForm')[0]),
+            processData: false,
+            contentType: false,
+
+            success: function(e){
+                console.log('成功');
+                location.href= ("homework_audit.html?hw_id="+hw_id);
+            },
+
+            error: function(xhr, ajaxOptions, thrownError){
+                console.log('失敗');
+                console.log(xhr.responseText);
+                console.log(xhr.status);
+                console.log(thrownError);
+            }
+        });
     });
     </script>
 

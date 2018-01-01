@@ -164,6 +164,7 @@
         success: function(JData){
           console.log('成功');
 
+          JData.sort(function(a,b){return a.member_account.localeCompare(b.member_account)});
           JData.sort(function(a,b){return a.permissions.localeCompare(b.permissions)});
           console.log(JData);
 

@@ -60,15 +60,6 @@
                     </tr>
                 </thead>
                 <tbody id="tbody_hw">
-                    <tr>
-                    <th scope="row">1</th>
-                    <td>HomeWork 1</td>
-                    <td>2017/10/30</td>
-                    <td class="text-warning">遲交</td>
-                    <td><a class="btn btn-info" href="homework_submit.html?hw_id=6">上傳作業</a></td>
-                    <td>68</td>
-                    </tr>
-
                 </tbody>
                 </table>
             </div>
@@ -147,12 +138,23 @@
           $("#tbody_hw").empty();
           var i = 0;
           $.each(JData, function() {
+            var status;
+            switch(JData[i].shw_status){
+              case "已繳交":
+                status="text-success";
+                break;
+              case "未繳交":
+                status="text-danger";
+                break;
+              default:
+                status="text-warning";
+            }
             $("#tbody_hw").append("\
             <tr>\
               <th scope=\"row\">"+(i+1)+"</th>\
               <td>"+ JData[i].hw_name +"</td>\
               <td>"+ dateFormatter(JData[i].deadline) +"</td>\
-              <td class=\"text-warning\">"+ JData[i].shw_status +"</td>\
+              <td class='"+status+"'>"+ JData[i].shw_status +"</td>\
               <td><a class=\"btn btn-info\" href=\"homework_submit.html?hw_id="+ JData[i].hw_id +"\">上傳作業</a></td>\
               <td>"+ JData[i].shw_fraction +"</td>\
             </tr>");
