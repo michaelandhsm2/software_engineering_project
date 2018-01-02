@@ -136,6 +136,8 @@
           console.log('成功');
           console.log(JData);
 
+          JData.sort(function(a,b){return a.deadline - b.deadline});
+
           $("#tbody_hw").empty();
           var i = 0;
           $.each(JData, function() {
@@ -145,6 +147,9 @@
                 status="text-success";
                 break;
               case "未繳交":
+                status="text-danger";
+                break;
+              case "不得補交":
                 status="text-danger";
                 break;
               default:
@@ -157,9 +162,9 @@
               <td>"+ dateFormatter(JData[i].deadline) +"</td>\
               <td class='"+status+"'>"+ JData[i].shw_status +"</td>\
               <td>\
-                <a class=\"btn btn-info\" href=\"homework_submit.html?hw_id="+ JData[i].hw_id +"\">上傳作業</a>"+
-                (JData[i].shw_status!="未繳交"? "  <a class=\"btn btn-info\" href="+SERVER_API+"/download/"+JData[i].file_id+"'>下載作業</a>":"")+
-              "</td>\
+                <a class=\"btn btn-info "+(JData[i].shw_status=="不得補交"?"disabled":"")+"\" href=\"homework_submit.html?hw_id="+ JData[i].hw_id +"\">上傳作業</a>\
+                <a class=\"btn btn-info\" "+(JData[i].file_id==0?"hidden":"")+" href="+SERVER_API+"/download/"+JData[i].file_id+">下載作業</a>\
+              </td>\
               <td>"+ JData[i].shw_fraction +"</td>\
             </tr>");
             i++;

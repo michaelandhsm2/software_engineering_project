@@ -167,7 +167,7 @@
 
     // 顯示作業資訊
     $.ajax({
-        url: "http://127.0.0.1:8080/SE_final/api/hwAllDetail",
+        url: SERVER_API + "/hwAllDetail",
         data: {
             'hw_id': hw_id
         },
@@ -184,11 +184,26 @@
 
               calculate(JData[i].shw_fraction);
 
+              var status;
+              switch(JData[i].shw_status){
+                case "已繳交":
+                  status="text-success";
+                  break;
+                case "未繳交":
+                  status="text-danger";
+                  break;
+                case "不得補交":
+                  status="text-danger";
+                  break;
+                default:
+                  status="text-warning";
+              }
+
               $("#tbody_shw").append("\
               <tr>\
                 <th scope=\"row\">"+(i+1)+"</th>\
                 <td><a href=\"homework_personal.html?user_id="+ JData[i].user_id +"&course_id="+ JData[i].course_id +"\">"+ JData[i].studentName +"</a></td>\
-                <td class=\"text-warning\">"+ JData[i].shw_status +"</td>\
+                <td class='"+status+"'>"+ JData[i].shw_status +"</td>\
                 <td>"+ JData[i].shw_fraction +"</td>\
               </tr>");
               i++;
