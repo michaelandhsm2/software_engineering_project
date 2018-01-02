@@ -158,7 +158,7 @@
               <td class='"+status+"'>"+ JData[i].shw_status +"</td>\
               <td>\
                 <a class=\"btn btn-info\" href=\"homework_submit.html?hw_id="+ JData[i].hw_id +"\">上傳作業</a>"+
-                (JData[i].shw_status!="未繳交"? "  <a class=\"btn btn-info\" href="+SERVER_API+"/download/"+JData[i].file_id+"'>下載作業</a>":"")+
+                (JData[i].shw_status!="未繳交"? "  <a class=\"btn btn-info\" href="+SERVER_API+"/download/"+JData[i].file_id+">下載作業</a>":"")+
               "</td>\
               <td>"+ JData[i].shw_fraction +"</td>\
             </tr>");
