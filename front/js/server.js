@@ -3,5 +3,5 @@ var SERVER_API = "http://140.124.183.30:8080/SE_Final/api";
 
 function logout(){
   window.sessionStorage.clear();
-  location.href= ("index.html");  
+  location.href= ("index.html");
 }
